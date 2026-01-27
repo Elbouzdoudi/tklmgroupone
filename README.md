@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TAKALAM - English Tutoring Landing Page
+
+A modern, conversion-focused landing page for TAKALAM, a personal English tutoring brand.
+
+## Tech Stack
+
+- **Next.js 16** - React framework
+- **Tailwind CSS** - Utility-first CSS
+- **TypeScript** - Type safety
+
+## Features
+
+- Single-page, conversion-focused design
+- Mobile-first responsive layout
+- Smooth scroll animations
+- WhatsApp integration for direct contact
+- Clean, professional UI with green brand accents
+- No backend, fully static
 
 ## Getting Started
 
-First, run the development server:
+### Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Deploy to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-repo/takalam-landing)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Or deploy manually:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm install -g vercel
+vercel
+```
 
-## Deploy on Vercel
+## Page Sections
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Hero** - Main headline with CTAs
+2. **About** - Brand introduction
+3. **Who It's For** - Target audience cards
+4. **What You Get** - Service features
+5. **How It Works** - 3-step process
+6. **Why Takalam** - Value propositions
+7. **Testimonials** - Student reviews
+8. **Pricing** - Soft pricing information
+9. **Final CTA** - WhatsApp conversion
+10. **Contact** - Form and contact details
+11. **Footer** - Links and copyright
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Customization
+
+### Update Contact Info
+
+Edit the WhatsApp number and email in these files:
+- `app/components/Hero.tsx`
+- `app/components/FinalCTA.tsx`
+- `app/components/Contact.tsx`
+- `app/components/Footer.tsx`
+
+Replace `212600000000` with your actual WhatsApp number (including country code, no + or spaces).
+
+### Update Colors
+
+The primary green color can be adjusted in `app/globals.css`:
+
+```css
+:root {
+  --primary: #16a34a;
+  --primary-dark: #15803d;
+  --primary-light: #22c55e;
+}
+```
+
+## License
+
+Private - TAKALAM
