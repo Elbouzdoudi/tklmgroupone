@@ -128,8 +128,7 @@ export default function Contact() {
         
         if (!result.success) {
           throw new Error(result.message || 'Form submission failed');
-        }
-      } else {
+        } else {
         // Send to Google Sheets
         const response = await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
