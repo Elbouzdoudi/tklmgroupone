@@ -100,7 +100,7 @@ export default function IntroVideo() {
           <iframe
             className="absolute inset-0 w-full h-full"
             src={`https://www.youtube.com/embed/${videoConfig.src}?autoplay=1&rel=0`}
-            title="Intro Video"
+            title="Meet Your English Teacher - Introduction Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
@@ -114,7 +114,7 @@ export default function IntroVideo() {
           <iframe
             className="absolute inset-0 w-full h-full"
             src={`https://player.vimeo.com/video/${videoConfig.src}?autoplay=1`}
-            title="Intro Video"
+            title="Meet Your English Teacher - Introduction Video"
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
           />

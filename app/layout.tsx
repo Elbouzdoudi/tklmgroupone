@@ -18,7 +18,6 @@ const notoSansArabic = Noto_Sans_Arabic({
   weight: ["400", "500", "600", "700"],
 });
 
-// Replace with your Google Analytics Measurement ID (e.g., G-XXXXXXXXXX)
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://takalam.ma";
@@ -41,20 +40,11 @@ export const metadata: Metadata = {
     siteName: "TAKALAM",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "TAKALAM - Speak English with Confidence",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "TAKALAM - Speak English with Confidence",
     description: "Personalized 1-to-1 English coaching for adults. Build your speaking confidence.",
-    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -67,9 +57,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({
@@ -80,6 +67,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.variable} ${notoSansArabic.variable} antialiased`}>
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-green-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:outline-none"
+        >
+          Skip to main content
+        </a>
         {GA_MEASUREMENT_ID && (
           <>
             <Script

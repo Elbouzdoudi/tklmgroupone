@@ -31,45 +31,58 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm"
-          : "bg-white"
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+        isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
       }`}
+      style={{ direction: "ltr" }}
     >
-      <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between py-2 ${isRTL ? "flex-row-reverse" : ""}`}>
-          {/* Logo */}
-          <a href="#" className="flex-shrink-0 -my-28">
-            <Image
-              src="/logo.png"
-              alt="TAKALAM"
-              width={1200}
-              height={300}
-              className="h-80 w-auto"
-              priority
-            />
-          </a>
+      <div 
+        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+        style={{ direction: "ltr" }}
+      >
+        <div 
+          className="flex items-center justify-between py-2 gap-4"
+          style={{ direction: "ltr" }}
+        >
+          {/* Logo - LEFT */}
+          <div className="flex-shrink-0 -my-28" style={{ minWidth: "200px" }}>
+            <a href="#">
+              <Image
+                src="/logo.png"
+                alt="TAKALAM"
+                width={1200}
+                height={300}
+                className="h-80 w-auto"
+                priority
+              />
+            </a>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className={`hidden md:flex items-center gap-10 mx-auto ${isRTL ? "flex-row-reverse" : ""}`}>
+          {/* Desktop Navigation - CENTER */}
+          <nav 
+            className="hidden md:flex items-center justify-center gap-8 flex-1"
+            style={{ direction: "ltr" }}
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-gray-600 hover:text-green-600 transition-colors text-[15px] font-medium"
+                className="text-gray-600 hover:text-green-600 transition-colors text-[15px] font-medium whitespace-nowrap"
               >
                 {link.label}
               </a>
             ))}
-          </div>
+          </nav>
 
-          {/* Right Side - Language + CTA */}
-          <div className={`hidden md:flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
+          {/* Right Side - Language + CTA - RIGHT */}
+          <div 
+            className="hidden md:flex items-center gap-4 flex-shrink-0"
+            style={{ direction: "ltr" }}
+          >
             <LanguageSwitcher />
             <a
               href="#contact"
-              className="bg-green-600 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors shadow-sm"
+              className="bg-green-600 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap"
             >
               {t("header.getStarted")}
             </a>
@@ -108,13 +121,16 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 py-4 animate-fade-in">
+          <div 
+            className="md:hidden bg-white border-t border-gray-100 py-4"
+            style={{ direction: isRTL ? "rtl" : "ltr" }}
+          >
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`text-gray-600 hover:text-green-600 hover:bg-gray-50 transition-colors px-4 py-3 rounded-lg ${isRTL ? "text-right" : "text-left"}`}
+                  className="text-gray-600 hover:text-green-600 hover:bg-gray-50 transition-colors px-4 py-3 rounded-lg"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -135,7 +151,7 @@ export default function Header() {
             </div>
           </div>
         )}
-      </nav>
+      </div>
     </header>
   );
 }

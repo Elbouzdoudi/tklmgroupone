@@ -104,44 +104,22 @@ export default function Contact() {
         city: formData.city,
         package: `${selectedPackage?.name || 'Not specified'} - ${selectedPackage?.price || ''}`,
         message: formData.message || '',
-        paymentStatus: 'Awaiting screenshot via WhatsApp'
+        paymentStatus: 'Awaiting screenshot via WhatsApp',
+        submittedAt: new Date().toLocaleString()
       };
 
-      // ...existing code...
-        dataToSend.append('Phone', formData.phone);
-        dataToSend.append('Email', formData.email);
-        dataToSend.append('Age', formData.age);
-        dataToSend.append('Sex', formData.sex);
-        dataToSend.append('Country', formData.country);
-        dataToSend.append('City', formData.city);
-        dataToSend.append('Package Selected', dataToSend.package);
-        dataToSend.append('Message', formData.message || 'No additional message');
-        dataToSend.append('Submitted At', new Date().toLocaleString());
-        dataToSend.append('Payment Status', 'Awaiting screenshot via WhatsApp');
-
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: dataToSend
-        });
-
-        const result = await response.json();
-        
-        if (!result.success) {
-          throw new Error(result.message || 'Form submission failed');
-        } else {
-        // Send to Google Sheets
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(dataToSend)
-        });
-        
-        // With no-cors mode, we can't read the response, so we assume success
-        // The Google Script handles errors internally
-      }
+      // Send to Google Sheets
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend)
+      });
+      
+      // With no-cors mode, we can't read the response, so we assume success
+      // The Google Script handles errors internally
 
       setSubmitStatus('success');
       setFormData({
@@ -197,17 +175,17 @@ export default function Contact() {
           <div className="flex items-center justify-center gap-4 sm:gap-8">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
-              <span className="text-sm font-medium text-gray-700 hidden sm:inline">Book</span>
+              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepBook")}</span>
             </div>
             <div className="w-8 sm:w-16 h-0.5 bg-green-300"></div>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
-              <span className="text-sm font-medium text-gray-700 hidden sm:inline">Pay</span>
+              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepPay")}</span>
             </div>
             <div className="w-8 sm:w-16 h-0.5 bg-green-300"></div>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
-              <span className="text-sm font-medium text-gray-700 hidden sm:inline">Register</span>
+              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepRegister")}</span>
             </div>
           </div>
         </div>
@@ -221,8 +199,8 @@ export default function Contact() {
               <span className="text-white font-bold">1</span>
             </div>
             <div>
-              <h3 className="font-bold text-lg text-gray-800">Book Your Session</h3>
-              <p className="text-sm text-gray-600">Select a date and time that works for you</p>
+              <h3 className="font-bold text-lg text-gray-800">{t("contact.bookSession")}</h3>
+              <p className="text-sm text-gray-600">{t("contact.bookSessionDesc")}</p>
             </div>
           </div>
           <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
@@ -230,8 +208,9 @@ export default function Contact() {
               src="https://cal.com/takalam-english-center-azwhqs/50mins?embed=true&theme=light&layout=month_view"
               style={{ width: '100%', height: '550px', border: 'none' }}
               frameBorder="0"
-              title="Book a Session"
+              title="Book a Session - Takalam Calendar"
               allow="payment"
+              loading="lazy"
             />
           </div>
         </div>
@@ -245,14 +224,14 @@ export default function Contact() {
               <span className="text-white font-bold">2</span>
             </div>
             <div>
-              <h3 className="font-bold text-lg text-gray-800">Make Payment</h3>
-              <p className="text-sm text-gray-600">Transfer the amount for your selected package</p>
+              <h3 className="font-bold text-lg text-gray-800">{t("contact.makePayment")}</h3>
+              <p className="text-sm text-gray-600">{t("contact.makePaymentDesc")}</p>
             </div>
           </div>
           
           {/* Package Prices */}
           <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm mb-6">
-            <h4 className="font-semibold text-gray-800 mb-3">Package Prices</h4>
+            <h4 className="font-semibold text-gray-800 mb-3">{t("contact.packagePrices")}</h4>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {packagesData.map((pkg) => (
                 <div key={pkg.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
@@ -313,7 +292,7 @@ export default function Contact() {
                     height={400}
                     className="w-full max-w-[180px] h-auto rounded-xl"
                   />
-                  <p className="text-xs text-gray-500 mt-2 text-center">Click to enlarge</p>
+                  <p className="text-xs text-gray-500 mt-2 text-center">{t("contact.clickToEnlarge")}</p>
                 </button>
               </div>
 
@@ -333,42 +312,42 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">PayPal</h3>
-                  <p className="text-blue-100 text-sm">Fast & secure international payments</p>
+                  <h3 className="font-bold text-lg">{t("contact.paypalTitle")}</h3>
+                  <p className="text-blue-100 text-sm">{t("contact.paypalSubtitle")}</p>
                 </div>
               </div>
 
               <div className="bg-white/10 rounded-xl p-4 mb-4">
-                <p className="text-blue-200 text-xs uppercase tracking-wide mb-2">Send payment to:</p>
+                <p className="text-blue-200 text-xs uppercase tracking-wide mb-2">{t("contact.paypalSendTo")}</p>
                 <p className="font-mono font-bold text-lg break-all">mohammedsaidelbouzdoudi99@gmail.com</p>
               </div>
 
               <div className="space-y-3">
                 <div className="bg-white/10 rounded-lg p-3">
-                  <p className="text-blue-200 text-sm mb-2">How to pay with PayPal:</p>
+                  <p className="text-blue-200 text-sm mb-2">{t("contact.paypalHowTo")}</p>
                   <ol className="text-sm space-y-1.5 text-blue-50">
                     <li className="flex items-start gap-2">
                       <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</span>
-                      <span>Log in to your PayPal account</span>
+                      <span>{t("contact.paypalStep1")}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</span>
-                      <span>Click &quot;Send&quot; and enter the email above</span>
+                      <span>{t("contact.paypalStep2")}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</span>
-                      <span>Enter the amount for your package</span>
+                      <span>{t("contact.paypalStep3")}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">4</span>
-                      <span>Add your full name in the note</span>
+                      <span>{t("contact.paypalStep4")}</span>
                     </li>
                   </ol>
                 </div>
               </div>
 
               <p className="text-blue-200 text-xs mt-4 text-center">
-                Ideal for international students
+                {t("contact.paypalIdeal")}
               </p>
             </div>
           </div>
@@ -383,8 +362,8 @@ export default function Contact() {
               <span className="text-white font-bold">3</span>
             </div>
             <div>
-              <h3 className="font-bold text-lg text-gray-800">Register & Send Payment Proof</h3>
-              <p className="text-sm text-gray-600">Fill out the form, then send your payment screenshot via WhatsApp</p>
+              <h3 className="font-bold text-lg text-gray-800">{t("contact.registerSendProof")}</h3>
+              <p className="text-sm text-gray-600">{t("contact.registerSendProofDesc")}</p>
             </div>
           </div>
 
@@ -399,9 +378,9 @@ export default function Contact() {
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="font-semibold text-lg">Registration Received!</span>
+                    <span className="font-semibold text-lg">{t("contact.successTitle")}</span>
                   </div>
-                  <p className="text-green-700 mb-4">Your registration has been submitted. Now send your payment screenshot via WhatsApp to complete enrollment:</p>
+                  <p className="text-green-700 mb-4">{t("contact.successText")}</p>
                   <a
                     href="https://wa.me/212722774753?text=Hi%2C%20I%20just%20submitted%20my%20registration%20form.%20Here%20is%20my%20payment%20screenshot%3A"
                     target="_blank"
@@ -411,7 +390,7 @@ export default function Contact() {
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                     </svg>
-                    Send Payment Screenshot via WhatsApp
+                    {t("contact.sendScreenshot")}
                   </a>
                 </div>
               )}
@@ -593,7 +572,7 @@ export default function Contact() {
                     <svg className="w-6 h-6 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                     </svg>
-                    <p className="text-sm text-green-700">After submitting, click the WhatsApp button to send your payment screenshot</p>
+                    <p className="text-sm text-green-700">{t("contact.whatsappNote")}</p>
                   </div>
                 </div>
 
@@ -653,12 +632,13 @@ export default function Contact() {
             <button
               onClick={() => setShowQRModal(false)}
               className="absolute top-3 right-3 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
+              aria-label="Close modal"
             >
               <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3 text-center">Scan QR Code to Pay</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-3 text-center">{t("contact.qrModalTitle")}</h3>
             <Image
               src="/bank-qr.png"
               alt="Bank QR Code"
@@ -666,7 +646,7 @@ export default function Contact() {
               height={600}
               className="w-full h-auto rounded-xl"
             />
-            <p className="text-sm text-gray-500 mt-3 text-center">Scan with your banking app to get payment details</p>
+            <p className="text-sm text-gray-500 mt-3 text-center">{t("contact.qrModalDesc")}</p>
           </div>
         </div>
       )}

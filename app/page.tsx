@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         {/* Primary Flow: Hero → Video → Why/Who → What → Pricing → Steps */}
         <Hero />
         <IntroVideo />
