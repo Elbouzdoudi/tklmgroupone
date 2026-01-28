@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "../i18n/useTranslation";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Header() {
   const { t } = useTranslation();
+  const { dir } = useLanguage();
+  const isRTL = dir === "rtl";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -22,6 +25,7 @@ export default function Header() {
     { href: "#intro-video", label: t("header.meetTeacher") },
     { href: "#why-takalam", label: t("header.whyTakalam") },
     { href: "#pricing", label: t("header.pricing") },
+    { href: "#faq", label: t("header.faq") },
     { href: "#contact", label: t("header.contact") },
   ];
 
@@ -34,21 +38,21 @@ export default function Header() {
       }`}
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className={`flex items-center justify-between py-2 ${isRTL ? "flex-row-reverse" : ""}`}>
           {/* Logo */}
-          <a href="#" className="flex-shrink-0">
+          <a href="#" className="flex-shrink-0 -my-28">
             <Image
               src="/logo.png"
               alt="TAKALAM"
-              width={220}
-              height={55}
-              className="h-12 w-auto"
+              width={1200}
+              height={300}
+              className="h-80 w-auto"
               priority
             />
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className={`hidden md:flex items-center gap-10 ${isRTL ? "flex-row-reverse" : ""}`}>
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -61,7 +65,7 @@ export default function Header() {
           </div>
 
           {/* Right Side - Language + CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className={`hidden md:flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
             <LanguageSwitcher />
             <a
               href="#contact"
@@ -110,7 +114,7 @@ export default function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-gray-600 hover:text-green-600 hover:bg-gray-50 transition-colors px-4 py-3 rounded-lg"
+                  className={`text-gray-600 hover:text-green-600 hover:bg-gray-50 transition-colors px-4 py-3 rounded-lg ${isRTL ? "text-right" : "text-left"}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
