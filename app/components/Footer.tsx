@@ -38,6 +38,12 @@ export default function Footer() {
             <a href="#how-it-works" className="hover:text-green-400 transition-colors">
               {t("footer.howItWorks")}
             </a>
+            <a href="#faq" className="hover:text-green-400 transition-colors">
+              {t("footer.faq")}
+            </a>
+            <a href="/blog" className="hover:text-green-400 transition-colors">
+              {t("footer.blog")}
+            </a>
             <a href="#contact" className="hover:text-green-400 transition-colors">
               {t("footer.contact")}
             </a>

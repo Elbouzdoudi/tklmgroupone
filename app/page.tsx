@@ -6,6 +6,8 @@ import WhatYouGet from "./components/WhatYouGet";
 import Pricing from "./components/Pricing";
 import HowItWorks from "./components/HowItWorks";
 import Testimonials from "./components/Testimonials";
+import Stats from "./components/Stats";
+import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
@@ -24,6 +26,8 @@ export default function Home() {
         
         {/* Social Proof & Conversion */}
         <Testimonials />
+        <Stats />
+        <FAQ />
         <Contact />
       </main>
       <Footer />

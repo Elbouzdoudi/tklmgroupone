@@ -88,9 +88,8 @@ export default function Contact() {
     setSubmitStatus('idle');
 
     try {
-      // Google Apps Script URL - Deploy your script and paste the URL here
-      // Follow instructions in GOOGLE_SHEETS_SETUP.md
-      const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+      // Google Apps Script URL for form submissions
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFKtEtqVOOnNWm-3KatYnEjt7_9x5py9hek8j7qfbvQ3GJnlKgJJebYZrPVSbk6_Lw8g/exec';
       
       const selectedPackage = packagesData.find(p => p.id === formData.package);
       

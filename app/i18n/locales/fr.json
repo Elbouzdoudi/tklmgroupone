@@ -3,6 +3,7 @@
     "meetTeacher": "Rencontrez Votre Professeur",
     "whyTakalam": "Pourquoi Takalam",
     "pricing": "Tarifs",
+    "faq": "FAQ",
     "contact": "Contact",
     "getStarted": "Commencer"
   },
@@ -224,6 +225,8 @@
     "about": "À Propos",
     "whoItsFor": "Pour Qui",
     "howItWorks": "Comment Ça Marche",
+    "faq": "FAQ",
+    "blog": "Blog",
     "contact": "Contact",
     "termsAndPolicies": "Conditions et Politiques",
     "copyright": "TAKALAM. Tous droits réservés.",
@@ -291,5 +294,40 @@
     "contactEmail": "Envoyer un Email",
     "lastUpdated": "Dernière mise à jour",
     "allRightsReserved": "Tous droits réservés."
+  },
+  "faq": {
+    "title": "Questions",
+    "titleHighlight": "Fréquentes",
+    "subtitle": "Tout ce que vous devez savoir avant de commencer.",
+    "q1": "Quel niveau d'anglais faut-il pour commencer ?",
+    "a1": "Tout niveau ! Que vous soyez débutant complet ou locuteur avancé cherchant à perfectionner vos compétences, les cours sont personnalisés selon votre niveau et vos objectifs.",
+    "q2": "Que se passe-t-il si je manque une session ?",
+    "a2": "Vous pouvez reprogrammer avec 24 heures de préavis sans frais supplémentaires. Les sessions manquées sans préavis sont comptées comme complétées. Consultez notre politique complète sur la page Conditions et Politiques.",
+    "q3": "De quel équipement ai-je besoin ?",
+    "a3": "Juste un smartphone, une tablette ou un ordinateur avec une connexion internet stable. Nous utilisons Zoom ou Google Meet - les deux sont gratuits et faciles à utiliser.",
+    "q4": "Quelle est la durée de chaque session ?",
+    "a4": "Chaque session dure 50 minutes - assez de temps pour faire de vrais progrès tout en restant engagé et concentré.",
+    "q5": "Puis-je changer de forfait plus tard ?",
+    "a5": "Oui ! Vous pouvez passer à un forfait plus grand à tout moment. Contactez-nous pour discuter de vos options et nous vous aiderons à faire la transition en douceur.",
+    "q6": "Quels modes de paiement acceptez-vous ?",
+    "a6": "Nous acceptons les virements bancaires (CIH Bank) et PayPal. Le paiement doit être effectué avant votre première session.",
+    "q7": "Comment planifier mes sessions ?",
+    "a7": "Après l'inscription, vous réserverez vos sessions directement via notre calendrier. Choisissez les horaires qui conviennent à votre emploi du temps - nous offrons des créneaux flexibles.",
+    "q8": "Y a-t-il un essai gratuit ?",
+    "a8": "Nous n'offrons pas d'essai gratuit, mais vous pouvez commencer par une session unique (200 DHS) pour découvrir la méthode Takalam avant de vous engager dans un forfait.",
+    "stillQuestions": "Vous avez encore des questions ?",
+    "contactUs": "Contactez-nous"
+  },
+  "stats": {
+    "students": "Étudiants Satisfaits",
+    "hours": "Heures Enseignées",
+    "satisfaction": "Taux de Satisfaction",
+    "rating": "Note Moyenne"
+  },
+  "cookies": {
+    "title": "Avis sur les Cookies",
+    "message": "Nous utilisons des cookies pour améliorer votre expérience et analyser le trafic du site. En continuant à utiliser notre site, vous acceptez notre utilisation des cookies.",
+    "accept": "Accepter",
+    "decline": "Refuser"
   }
 }

@@ -3,6 +3,7 @@
     "meetTeacher": "Meet Your Teacher",
     "whyTakalam": "Why Takalam",
     "pricing": "Pricing",
+    "faq": "FAQ",
     "contact": "Contact",
     "getStarted": "Get Started"
   },
@@ -224,6 +225,8 @@
     "about": "About",
     "whoItsFor": "Who It's For",
     "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "blog": "Blog",
     "contact": "Contact",
     "termsAndPolicies": "Terms & Policies",
     "copyright": "TAKALAM. All rights reserved.",
@@ -291,5 +294,40 @@
     "contactEmail": "Send Email",
     "lastUpdated": "Last updated",
     "allRightsReserved": "All rights reserved."
+  },
+  "faq": {
+    "title": "Frequently Asked",
+    "titleHighlight": "Questions",
+    "subtitle": "Everything you need to know before getting started.",
+    "q1": "What level of English do I need to start?",
+    "a1": "Any level! Whether you're a complete beginner or advanced speaker looking to refine your skills, lessons are personalized to your current level and goals.",
+    "q2": "What if I miss a scheduled session?",
+    "a2": "You can reschedule with 24 hours notice at no extra cost. Sessions missed without notice are counted as completed. See our full policy on the Terms & Policies page.",
+    "q3": "What equipment do I need?",
+    "a3": "Just a smartphone, tablet, or computer with a stable internet connection. We use Zoom or Google Meet - both are free and easy to use.",
+    "q4": "How long is each session?",
+    "a4": "Each session is 50 minutes long - enough time to make real progress while keeping you engaged and focused.",
+    "q5": "Can I change my package later?",
+    "a5": "Yes! You can upgrade to a larger package anytime. Contact us to discuss your options and we'll help you transition smoothly.",
+    "q6": "What payment methods do you accept?",
+    "a6": "We accept bank transfers (CIH Bank) and PayPal. Payment must be completed before your first session.",
+    "q7": "How do I schedule my sessions?",
+    "a7": "After registration, you'll book sessions directly through our calendar. Choose times that work for your schedule - we offer flexible slots.",
+    "q8": "Is there a free trial?",
+    "a8": "We don't offer free trials, but you can start with a single session (200 DHS) to experience the Takalam method before committing to a package.",
+    "stillQuestions": "Still have questions?",
+    "contactUs": "Contact us"
+  },
+  "stats": {
+    "students": "Happy Students",
+    "hours": "Hours Taught",
+    "satisfaction": "Satisfaction Rate",
+    "rating": "Average Rating"
+  },
+  "cookies": {
+    "title": "Cookie Notice",
+    "message": "We use cookies to improve your experience and analyze site traffic. By continuing to use our site, you agree to our use of cookies.",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }
