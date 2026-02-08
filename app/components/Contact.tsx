@@ -29,10 +29,25 @@ const countries = [
 ];
 
 const packagesData = [
-  { id: 'single', name: 'Single Session', price: '200 DHS' },
-  { id: 'weekly', name: 'Weekly Package', price: '550 DHS' },
-  { id: 'monthly', name: 'Monthly Package', price: '2200 DHS' },
-  { id: 'trimester', name: 'Trimester Package', price: '6500 DHS' },
+  // 1-on-1 Private Sessions
+  { id: 'single', name: '1-on-1: Single Session', price: '200 DHS', type: 'private' },
+  { id: 'weekly', name: '1-on-1: Weekly Package', price: '550 DHS', type: 'private' },
+  { id: 'monthly', name: '1-on-1: Monthly Package', price: '2200 DHS', type: 'private' },
+  { id: 'trimester', name: '1-on-1: Trimester Package', price: '6500 DHS', type: 'private' },
+  // Group Sessions
+  { id: 'group10', name: 'Group of 10', price: '200 MAD/month', type: 'group' },
+  { id: 'group5', name: 'Group of 5', price: '400 MAD/month', type: 'group' },
+];
+
+const groupTimeSlots = [
+  { id: '8pm-9pm', label: '8:00 p.m. – 9:00 p.m.' },
+  { id: '9pm-10pm', label: '9:00 p.m. – 10:00 p.m.' },
+];
+
+const groupDays = [
+  { id: 'mon-wed', label: 'Monday – Wednesday' },
+  { id: 'tue-thu', label: 'Tuesday – Thursday' },
+  { id: 'fri-sun', label: 'Friday – Sunday' },
 ];
 
 export default function Contact() {
@@ -54,8 +69,13 @@ export default function Contact() {
     country: 'Morocco',
     city: '',
     package: '',
+    groupTimeSlot: '',
+    groupDays: '',
     message: ''
   });
+
+  // Check if selected package is a group package
+  const isGroupPackage = formData.package.startsWith('group');
 
 
   useEffect(() => {
@@ -92,6 +112,9 @@ export default function Contact() {
       const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFKtEtqVOOnNWm-3KatYnEjt7_9x5py9hek8j7qfbvQ3GJnlKgJJebYZrPVSbk6_Lw8g/exec';
       
       const selectedPackage = packagesData.find(p => p.id === formData.package);
+      const isGroup = formData.package.startsWith('group');
+      const selectedTimeSlot = groupTimeSlots.find(t => t.id === formData.groupTimeSlot);
+      const selectedDays = groupDays.find(d => d.id === formData.groupDays);
       
       const dataToSend = {
         firstName: formData.firstName,
@@ -103,6 +126,9 @@ export default function Contact() {
         country: formData.country,
         city: formData.city,
         package: `${selectedPackage?.name || 'Not specified'} - ${selectedPackage?.price || ''}`,
+        packageType: isGroup ? 'Group Session' : '1-on-1 Private Session',
+        groupTimeSlot: isGroup ? (selectedTimeSlot?.label || 'Not specified') : 'N/A',
+        groupDays: isGroup ? (selectedDays?.label || 'Not specified') : 'N/A',
         message: formData.message || '',
         paymentStatus: 'Awaiting screenshot via WhatsApp',
         submittedAt: new Date().toLocaleString()
@@ -132,6 +158,8 @@ export default function Contact() {
         country: 'Morocco',
         city: '',
         package: '',
+        groupTimeSlot: '',
+        groupDays: '',
         message: ''
       });
       
@@ -190,7 +218,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* STEP 1: Book Your Session */}
+        {/* STEP 1: Book Your Session (1-on-1 Only) */}
         <div
           className={`mb-10 ${isVisible ? "animate-fade-in-up delay-100" : "opacity-0"}`}
         >
@@ -201,6 +229,15 @@ export default function Contact() {
             <div>
               <h3 className="font-bold text-lg text-gray-800">{t("contact.bookSession")}</h3>
               <p className="text-sm text-gray-600">{t("contact.bookSessionDesc")}</p>
+            </div>
+          </div>
+          {/* 1-on-1 Timetable Label */}
+          <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+              <p className="text-sm text-green-700 font-medium">{t("contact.timetableNote")}</p>
             </div>
           </div>
           <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
@@ -565,6 +602,65 @@ export default function Contact() {
                     ))}
                   </select>
                 </div>
+
+                {/* Group Session Fields - Only show when group package is selected */}
+                {isGroupPackage && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 space-y-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                      </svg>
+                      <span className="font-semibold text-blue-800">{t("contact.groupScheduleTitle")}</span>
+                    </div>
+                    
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="groupTimeSlot" className="block text-sm font-medium text-blue-800 mb-1">
+                          {t("contact.groupTimeSlot")} <span className="text-red-500">{t("contact.required")}</span>
+                        </label>
+                        <select
+                          id="groupTimeSlot"
+                          name="groupTimeSlot"
+                          required={isGroupPackage}
+                          value={formData.groupTimeSlot}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none bg-white"
+                        >
+                          <option value="">{t("contact.selectTimeSlot")}</option>
+                          {groupTimeSlots.map((slot) => (
+                            <option key={slot.id} value={slot.id}>
+                              {slot.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label htmlFor="groupDays" className="block text-sm font-medium text-blue-800 mb-1">
+                          {t("contact.groupDays")} <span className="text-red-500">{t("contact.required")}</span>
+                        </label>
+                        <select
+                          id="groupDays"
+                          name="groupDays"
+                          required={isGroupPackage}
+                          value={formData.groupDays}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none bg-white"
+                        >
+                          <option value="">{t("contact.selectDays")}</option>
+                          {groupDays.map((day) => (
+                            <option key={day.id} value={day.id}>
+                              {day.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <p className="text-xs text-blue-700">
+                      {t("contact.groupScheduleNote")}
+                    </p>
+                  </div>
+                )}
 
                 {/* WhatsApp Reminder */}
                 <div className="bg-green-50 border border-green-200 rounded-xl p-4">

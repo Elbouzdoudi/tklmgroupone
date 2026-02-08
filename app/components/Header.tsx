@@ -24,7 +24,8 @@ export default function Header() {
   const navLinks = [
     { href: "#intro-video", label: t("header.meetTeacher") },
     { href: "#why-takalam", label: t("header.whyTakalam") },
-    { href: "#pricing", label: t("header.pricing") },
+    { href: "#private-sessions", label: t("header.privateSessions") },
+    { href: "#group-sessions", label: t("header.groupSessions") },
     { href: "#faq", label: t("header.faq") },
     { href: "#contact", label: t("header.contact") },
   ];

@@ -90,21 +90,24 @@ export default function Pricing() {
   return (
     <section
       ref={sectionRef}
-      id="pricing"
-      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-gray-50"
+      id="private-sessions"
+      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-green-50"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div
-          className={`text-center mb-16 ${
+          className={`text-center mb-8 ${
             isVisible ? "animate-fade-in-up" : "opacity-0"
           }`}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             {t("pricing.title")} <span className="text-green-600">{t("pricing.titleHighlight")}</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
             {t("pricing.subtitle")}
+          </p>
+          <p className="text-md text-green-700 font-medium bg-green-100 inline-block px-4 py-2 rounded-full">
+            {t("pricing.positioning")}
           </p>
         </div>
 
