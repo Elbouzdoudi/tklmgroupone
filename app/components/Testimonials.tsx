@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useTranslation } from "../i18n/useTranslation";
 
 export default function Testimonials() {
@@ -14,25 +15,27 @@ export default function Testimonials() {
       name: t("testimonials.name1"),
       role: t("testimonials.role1"),
       location: t("testimonials.location1"),
-      initials: "YM",
-      color: "bg-green-600",
+      image: "/pexels-italo-melo-881954-2379004.jpg",
     },
     {
       quote: t("testimonials.quote2"),
       name: t("testimonials.name2"),
       role: t("testimonials.role2"),
       location: t("testimonials.location2"),
-      initials: "SB",
-      color: "bg-blue-600",
+      image: "/pexels-mellamed-442447-1133742.jpg",
     },
     {
       quote: t("testimonials.quote3"),
       name: t("testimonials.name3"),
       role: t("testimonials.role3"),
       location: t("testimonials.location3"),
-      initials: "KA",
-      color: "bg-purple-600",
+      image: "/pexels-estudiopolaroid-3116381.jpg",
     },
+  ];
+
+  const videoTestimonials = [
+    { src: "/Pink & Purple Feminine Client Testimonial Instagram Reel (1).mp4" },
+    { src: "/Pink & Purple Feminine Client Testimonial Instagram Reel (2).mp4" },
   ];
 
   useEffect(() => {
@@ -104,8 +107,14 @@ export default function Testimonials() {
               {/* Author */}
               <div className="flex items-center gap-4">
                 {/* Avatar */}
-                <div className={`w-14 h-14 ${testimonial.color} rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
-                  {testimonial.initials}
+                <div className="w-14 h-14 rounded-full overflow-hidden shadow-lg ring-2 ring-green-100">
+                  <Image
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <div className="font-semibold text-gray-800">
@@ -124,6 +133,33 @@ export default function Testimonials() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Video Testimonials */}
+        <div
+          className={`mt-16 ${isVisible ? "animate-fade-in-up delay-300" : "opacity-0"}`}
+        >
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            {t("testimonials.videoTitle")} <span className="text-green-600">{t("testimonials.videoTitleHighlight")}</span>
+          </h3>
+          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {videoTestimonials.map((video, index) => (
+              <div
+                key={index}
+                className="relative rounded-2xl overflow-hidden shadow-xl bg-black aspect-[9/16] max-h-[500px]"
+              >
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                >
+                  <source src={video.src} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Trust badge */}

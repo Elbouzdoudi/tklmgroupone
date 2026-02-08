@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useTranslation } from "../i18n/useTranslation";
 
 export default function WhyTakalam() {
@@ -146,6 +147,39 @@ export default function WhyTakalam() {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {t("whyTakalam.subtitle")}
           </p>
+        </div>
+
+        {/* Learner Image Gallery Strip */}
+        <div
+          className={`mb-12 ${isVisible ? "animate-fade-in-up delay-50" : "opacity-0"}`}
+        >
+          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap">
+            {[
+              { src: "/pexels-beardedbasturds-842980.jpg", alt: "English learner" },
+              { src: "/pexels-simon-robben-55958-614810.jpg", alt: "English learner" },
+              { src: "/pexels-mellamed-442447-1133742.jpg", alt: "English learner" },
+              { src: "/pexels-italo-melo-881954-2379004.jpg", alt: "English learner" },
+              { src: "/pexels-mattycphoto-1062280.jpg", alt: "English learner" },
+              { src: "/pexels-minan1398-713312.jpg", alt: "English learner" },
+            ].map((img, index) => (
+              <div
+                key={index}
+                className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-lg ring-4 ring-white hover:scale-110 hover:ring-green-200 transition-all duration-300"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+              <span className="text-white font-bold text-sm sm:text-base">+500</span>
+            </div>
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-4">{t("whyTakalam.learnersJoined")}</p>
         </div>
 
         {/* Key Differentiators - Compact Row */}

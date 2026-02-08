@@ -38,15 +38,15 @@ export default function Header() {
       style={{ direction: "ltr" }}
     >
       <div 
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative"
         style={{ direction: "ltr" }}
       >
         <div 
-          className="flex items-center justify-between py-2 gap-4"
+          className="flex items-center justify-between py-2"
           style={{ direction: "ltr" }}
         >
           {/* Logo - LEFT */}
-          <div className="flex-shrink-0 -my-28" style={{ minWidth: "200px" }}>
+          <div className="flex-shrink-0 -my-28 w-[200px]">
             <a href="#">
               <Image
                 src="/logo.png"
@@ -61,7 +61,7 @@ export default function Header() {
 
           {/* Desktop Navigation - CENTER */}
           <nav 
-            className="hidden md:flex items-center justify-center gap-8 flex-1"
+            className="hidden md:flex items-center justify-center gap-6 flex-1"
             style={{ direction: "ltr" }}
           >
             {navLinks.map((link) => (
@@ -77,7 +77,7 @@ export default function Header() {
 
           {/* Right Side - Language + CTA - RIGHT */}
           <div 
-            className="hidden md:flex items-center gap-4 flex-shrink-0"
+            className="hidden md:flex items-center gap-4 flex-shrink-0 w-[200px] justify-end"
             style={{ direction: "ltr" }}
           >
             <LanguageSwitcher />

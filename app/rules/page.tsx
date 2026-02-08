@@ -38,6 +38,7 @@ export default function RulesPage() {
         t("rules.refund3"),
         t("rules.refund4"),
         t("rules.refund5"),
+        t("rules.refund6"),
       ],
     },
     {
@@ -148,6 +149,8 @@ export default function RulesPage() {
         t("rules.group4"),
         t("rules.group5"),
         t("rules.group6"),
+        t("rules.group7"),
+        t("rules.group8"),
       ],
       highlight: true,
     },

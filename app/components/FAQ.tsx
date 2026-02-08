@@ -34,6 +34,8 @@ export default function FAQ() {
     { q: t("faq.private.q4"), a: t("faq.private.a4") },
     { q: t("faq.private.q5"), a: t("faq.private.a5") },
     { q: t("faq.private.q6"), a: t("faq.private.a6") },
+    { q: t("faq.private.q7"), a: t("faq.private.a7") },
+    { q: t("faq.private.q8"), a: t("faq.private.a8") },
   ];
 
   const groupFaqs = [
@@ -43,6 +45,10 @@ export default function FAQ() {
     { q: t("faq.group.q4"), a: t("faq.group.a4") },
     { q: t("faq.group.q5"), a: t("faq.group.a5") },
     { q: t("faq.group.q6"), a: t("faq.group.a6") },
+    { q: t("faq.group.q7"), a: t("faq.group.a7") },
+    { q: t("faq.group.q8"), a: t("faq.group.a8") },
+    { q: t("faq.group.q9"), a: t("faq.group.a9") },
+    { q: t("faq.group.q10"), a: t("faq.group.a10") },
   ];
 
   const faqs = activeTab === "private" ? privateFaqs : groupFaqs;

@@ -73,9 +73,13 @@ export default function Contact() {
     groupDays: '',
     message: ''
   });
+  const [paymentScreenshot, setPaymentScreenshot] = useState<File | null>(null);
+  const [paymentPreview, setPaymentPreview] = useState<string | null>(null);
 
-  // Check if selected package is a group package
+  // Check if selected package is a group package or private package
   const isGroupPackage = formData.package.startsWith('group');
+  const isPrivatePackage = formData.package !== '' && !isGroupPackage;
+  const hasSelectedPackage = formData.package !== '';
 
 
   useEffect(() => {
@@ -102,6 +106,34 @@ export default function Contact() {
     }));
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type (images and PDF)
+      if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+        alert('Please upload an image (PNG, JPG) or PDF file');
+        return;
+      }
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        return;
+      }
+      setPaymentScreenshot(file);
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPaymentPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removePaymentScreenshot = () => {
+    setPaymentScreenshot(null);
+    setPaymentPreview(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -115,6 +147,14 @@ export default function Contact() {
       const isGroup = formData.package.startsWith('group');
       const selectedTimeSlot = groupTimeSlots.find(t => t.id === formData.groupTimeSlot);
       const selectedDays = groupDays.find(d => d.id === formData.groupDays);
+      
+      // Convert payment screenshot to base64 if present
+      let paymentScreenshotBase64 = '';
+      let paymentScreenshotName = '';
+      if (paymentScreenshot) {
+        paymentScreenshotBase64 = paymentPreview || '';
+        paymentScreenshotName = paymentScreenshot.name;
+      }
       
       const dataToSend = {
         firstName: formData.firstName,
@@ -130,7 +170,9 @@ export default function Contact() {
         groupTimeSlot: isGroup ? (selectedTimeSlot?.label || 'Not specified') : 'N/A',
         groupDays: isGroup ? (selectedDays?.label || 'Not specified') : 'N/A',
         message: formData.message || '',
-        paymentStatus: 'Awaiting screenshot via WhatsApp',
+        paymentScreenshot: paymentScreenshotBase64,
+        paymentScreenshotName: paymentScreenshotName,
+        paymentStatus: paymentScreenshot ? 'Screenshot Uploaded' : 'No screenshot uploaded',
         submittedAt: new Date().toLocaleString()
       };
 
@@ -148,6 +190,8 @@ export default function Contact() {
       // The Google Script handles errors internally
 
       setSubmitStatus('success');
+      setPaymentScreenshot(null);
+      setPaymentPreview(null);
       setFormData({
         firstName: '',
         familyName: '',
@@ -163,7 +207,7 @@ export default function Contact() {
         message: ''
       });
       
-      // Scroll to success message with WhatsApp button
+      // Scroll to success message
       setTimeout(() => {
         successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 100);
@@ -196,69 +240,73 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Step Progress Bar */}
+        {/* Step Progress Bar - Simplified: Pay → Register → Start/Wait */}
         <div
           className={`mb-10 ${isVisible ? "animate-fade-in-up delay-100" : "opacity-0"}`}
         >
           <div className="flex items-center justify-center gap-4 sm:gap-8">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
-              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepBook")}</span>
-            </div>
-            <div className="w-8 sm:w-16 h-0.5 bg-green-300"></div>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+              <div className={`w-8 h-8 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} text-white rounded-full flex items-center justify-center font-bold text-sm`}>1</div>
               <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepPay")}</span>
             </div>
-            <div className="w-8 sm:w-16 h-0.5 bg-green-300"></div>
+            <div className={`w-8 sm:w-16 h-0.5 ${isGroupPackage ? 'bg-blue-300' : 'bg-green-300'}`}></div>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+              <div className={`w-8 h-8 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} text-white rounded-full flex items-center justify-center font-bold text-sm`}>2</div>
               <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepRegister")}</span>
+            </div>
+            <div className={`w-8 sm:w-16 h-0.5 ${isGroupPackage ? 'bg-blue-300' : 'bg-green-300'}`}></div>
+            <div className="flex items-center gap-2">
+              <div className={`w-8 h-8 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} text-white rounded-full flex items-center justify-center font-bold text-sm`}>3</div>
+              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{isGroupPackage ? t("contact.stepWait") : t("contact.stepStart")}</span>
             </div>
           </div>
         </div>
 
-        {/* STEP 1: Book Your Session (1-on-1 Only) */}
+        {/* Communication Policy Banner */}
         <div
           className={`mb-10 ${isVisible ? "animate-fade-in-up delay-100" : "opacity-0"}`}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold">1</span>
+          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="font-bold text-amber-800 mb-1">{t("contact.commPolicyTitle")}</h4>
+                <ul className="text-sm text-amber-700 space-y-1">
+                  <li className="flex items-center gap-2">
+                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                    {t("contact.commPolicy1")}
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    {t("contact.commPolicy2")}
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    {t("contact.commPolicy3")}
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div>
-              <h3 className="font-bold text-lg text-gray-800">{t("contact.bookSession")}</h3>
-              <p className="text-sm text-gray-600">{t("contact.bookSessionDesc")}</p>
-            </div>
-          </div>
-          {/* 1-on-1 Timetable Label */}
-          <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-              <p className="text-sm text-green-700 font-medium">{t("contact.timetableNote")}</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
-            <iframe
-              src="https://cal.com/takalam-english-center-azwhqs/50mins?embed=true&theme=light&layout=month_view"
-              style={{ width: '100%', height: '550px', border: 'none' }}
-              frameBorder="0"
-              title="Book a Session - Takalam Calendar"
-              allow="payment"
-              loading="lazy"
-            />
           </div>
         </div>
 
-        {/* STEP 2: Make Payment */}
+        {/* STEP 1: Make Payment */}
         <div
           className={`mb-10 ${isVisible ? "animate-fade-in-up delay-150" : "opacity-0"}`}
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold">2</span>
+            <div className={`w-10 h-10 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} rounded-full flex items-center justify-center flex-shrink-0`}>
+              <span className="text-white font-bold">1</span>
             </div>
             <div>
               <h3 className="font-bold text-lg text-gray-800">{t("contact.makePayment")}</h3>
@@ -390,13 +438,13 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* STEP 3: Register & Send Proof */}
+        {/* STEP 2: Register & Send Proof */}
         <div
           className={`mb-6 ${isVisible ? "animate-fade-in-up delay-200" : "opacity-0"}`}
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold">3</span>
+            <div className={`w-10 h-10 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} rounded-full flex items-center justify-center flex-shrink-0`}>
+              <span className="text-white font-bold">2</span>
             </div>
             <div>
               <h3 className="font-bold text-lg text-gray-800">{t("contact.registerSendProof")}</h3>
@@ -417,18 +465,8 @@ export default function Contact() {
                     </svg>
                     <span className="font-semibold text-lg">{t("contact.successTitle")}</span>
                   </div>
-                  <p className="text-green-700 mb-4">{t("contact.successText")}</p>
-                  <a
-                    href="https://wa.me/212722774753?text=Hi%2C%20I%20just%20submitted%20my%20registration%20form.%20Here%20is%20my%20payment%20screenshot%3A"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-600 transition-all duration-300 hover:scale-105 animate-elegant-glow"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-                    {t("contact.sendScreenshot")}
-                  </a>
+                  <p className="text-green-700 mb-2">{t("contact.successText")}</p>
+                  <p className="text-green-600 text-sm">{t("contact.successNote")}</p>
                 </div>
               )}
 
@@ -603,6 +641,29 @@ export default function Contact() {
                   </select>
                 </div>
 
+                {/* Calendar - Only show when 1-on-1 private package is selected */}
+                {isPrivatePackage && (
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                      </svg>
+                      <span className="font-semibold text-green-800">{t("contact.bookSession")}</span>
+                    </div>
+                    <p className="text-sm text-green-700 mb-4">{t("contact.calendarInFormDesc")}</p>
+                    <div className="bg-white rounded-xl overflow-hidden border border-green-200 shadow-sm">
+                      <iframe
+                        src="https://cal.com/takalam-english-center-azwhqs/50mins?embed=true&theme=light&layout=month_view"
+                        style={{ width: '100%', height: '450px', border: 'none' }}
+                        frameBorder="0"
+                        title="Book a Session - Takalam Calendar"
+                        allow="payment"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 {/* Group Session Fields - Only show when group package is selected */}
                 {isGroupPackage && (
                   <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 space-y-4">
@@ -662,14 +723,61 @@ export default function Contact() {
                   </div>
                 )}
 
-                {/* WhatsApp Reminder */}
-                <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                  <div className="flex items-center gap-3">
-                    <svg className="w-6 h-6 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-                    <p className="text-sm text-green-700">{t("contact.whatsappNote")}</p>
-                  </div>
+                {/* Payment Screenshot Upload */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-gray-700">
+                    {t("contact.paymentScreenshotLabel")} <span className="text-red-500">{t("contact.required")}</span>
+                  </label>
+                  
+                  {!paymentPreview ? (
+                    <div className="relative">
+                      <input
+                        type="file"
+                        id="paymentScreenshot"
+                        accept="image/*,.pdf,application/pdf"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                      <label
+                        htmlFor="paymentScreenshot"
+                        className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-green-500 hover:bg-green-50/50 transition-all"
+                      >
+                        <svg className="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span className="text-sm text-gray-500">{t("contact.uploadScreenshot")}</span>
+                        <span className="text-xs text-red-400 mt-1">{t("contact.uploadScreenshotRequired")}</span>
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <div className="relative w-full h-40 rounded-xl overflow-hidden border border-gray-200">
+                        <Image
+                          src={paymentPreview}
+                          alt="Payment screenshot preview"
+                          fill
+                          className="object-contain bg-gray-50"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={removePaymentScreenshot}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-md"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                      <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {t("contact.screenshotReady")}
+                      </p>
+                    </div>
+                  )}
+                  
+                  <p className="text-xs text-gray-500">{t("contact.screenshotNote")}</p>
                 </div>
 
                 <div>
@@ -689,7 +797,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !paymentScreenshot}
                   className="w-full btn-primary bg-green-600 text-white py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
