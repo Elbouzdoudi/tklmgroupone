@@ -121,7 +121,7 @@ export default function Hero() {
               <div className="relative bg-gradient-to-br from-green-100 to-green-50 rounded-3xl p-3 shadow-2xl">
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white">
                   <Image
-                    src="/hero-image.png"
+                    src="/herosectionpic.jpg"
                     alt="Student in a 1-on-1 online English lesson with Takalam"
                     fill
                     className="object-cover"

@@ -141,7 +141,7 @@ export default function Contact() {
 
     try {
       // Google Apps Script URL for form submissions
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFKtEtqVOOnNWm-3KatYnEjt7_9x5py9hek8j7qfbvQ3GJnlKgJJebYZrPVSbk6_Lw8g/exec';
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyPyl7P6D7lntbnTkP2q8S2RfbbAYD3NCG1mqmXdnIuZCdsaQRfVb8VUqOsLoyQe9JWfA/exec';
       
       const selectedPackage = packagesData.find(p => p.id === formData.package);
       const isGroup = formData.package.startsWith('group');

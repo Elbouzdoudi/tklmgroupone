@@ -38,7 +38,7 @@ export default function Header() {
       style={{ direction: "ltr" }}
     >
       <div 
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative"
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ direction: "ltr" }}
       >
         <div 
@@ -46,14 +46,14 @@ export default function Header() {
           style={{ direction: "ltr" }}
         >
           {/* Logo - LEFT */}
-          <div className="flex-shrink-0 -my-28 w-[200px]">
+          <div className="flex-shrink-0 -my-28">
             <a href="#">
               <Image
                 src="/logo.png"
                 alt="TAKALAM"
                 width={1200}
                 height={300}
-                className="h-80 w-auto"
+                className="h-56 sm:h-64 md:h-72 lg:h-80 w-auto"
                 priority
               />
             </a>
@@ -61,14 +61,14 @@ export default function Header() {
 
           {/* Desktop Navigation - CENTER */}
           <nav 
-            className="hidden md:flex items-center justify-center gap-6 flex-1"
+            className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 flex-1 mx-4"
             style={{ direction: "ltr" }}
           >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-gray-600 hover:text-green-600 transition-colors text-[15px] font-medium whitespace-nowrap"
+                className="text-gray-600 hover:text-green-600 transition-colors text-sm xl:text-[15px] font-medium whitespace-nowrap"
               >
                 {link.label}
               </a>
@@ -77,21 +77,21 @@ export default function Header() {
 
           {/* Right Side - Language + CTA - RIGHT */}
           <div 
-            className="hidden md:flex items-center gap-4 flex-shrink-0 w-[200px] justify-end"
+            className="hidden lg:flex items-center gap-3 flex-shrink-0"
             style={{ direction: "ltr" }}
           >
             <LanguageSwitcher />
             <a
               href="#contact"
-              className="bg-green-600 text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap"
+              className="bg-green-600 text-white px-4 xl:px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition-colors shadow-sm whitespace-nowrap"
             >
               {t("header.getStarted")}
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile/Tablet Menu Button */}
           <button
-            className="md:hidden p-2 text-gray-600 hover:text-green-600"
+            className="lg:hidden p-2 text-gray-600 hover:text-green-600"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -123,7 +123,7 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div 
-            className="md:hidden bg-white border-t border-gray-100 py-4"
+            className="lg:hidden bg-white border-t border-gray-100 py-4"
             style={{ direction: isRTL ? "rtl" : "ltr" }}
           >
             <div className="flex flex-col gap-1">

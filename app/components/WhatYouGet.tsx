@@ -59,7 +59,7 @@ export default function WhatYouGet() {
               {/* Main image */}
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <Image
-                  src="/student-focused.png"
+                  src="/whatyougetpic.jpg"
                   alt="Focused student learning English online"
                   width={600}
                   height={450}
