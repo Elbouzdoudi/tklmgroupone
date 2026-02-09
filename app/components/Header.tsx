@@ -42,11 +42,11 @@ export default function Header() {
         style={{ direction: "ltr" }}
       >
         <div 
-          className="flex items-center justify-between py-2"
+          className="flex items-center justify-between py-2 pt-3 sm:pt-2"
           style={{ direction: "ltr" }}
         >
           {/* Logo - LEFT */}
-          <div className="flex-shrink-0 -my-28">
+          <div className="flex-shrink-0 -my-20 sm:-my-24 md:-my-26 lg:-my-28">
             <a href="#">
               <Image
                 src="/logo.png"

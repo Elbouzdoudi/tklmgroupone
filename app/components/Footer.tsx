@@ -106,6 +106,20 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-800 my-8"></div>
 
+        {/* Emergency Contact */}
+        <div className="text-center mb-6">
+          <p className="text-xs text-gray-500 mb-2">{t("footer.urgentOnly")}</p>
+          <a 
+            href="tel:+212722774753" 
+            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-green-400 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            +212 722 774 753
+          </a>
+        </div>
+
         {/* Copyright */}
         <div className="text-center text-sm">
           <p>© {currentYear} {t("footer.copyright")}</p>
