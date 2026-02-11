@@ -147,7 +147,10 @@
     "note1": "Toutes les leçons sont en 1-à-1",
     "note2": "Sessions en ligne (Zoom / Google Meet)",
     "note3": "Planification flexible",
-    "note4": "Les prix peuvent varier pour objectifs spéciaux (examens, entretiens)"
+    "note4": "Les prix peuvent varier pour objectifs spéciaux (examens, entretiens)",
+    "guaranteeTitle": "Garantie Satisfait ou Remboursé",
+    "guaranteeDesc": "Remboursement complet si vous annulez avant votre première session.",
+    "guaranteeLink": "Voir la politique de remboursement"
   },
   "groupSessions": {
     "title": "Sessions de Groupe",
@@ -187,7 +190,10 @@
     "howStep2": "Attendez que le groupe soit complet. Les groupes restent inactifs jusqu'à ce qu'ils soient pleins.",
     "howStep3": "Une fois complet, Takalam contacte tous les apprenants pour confirmer l'horaire et la date de début.",
     "howStep4": "Si un groupe ne se forme pas, les remboursements s'appliquent selon les Conditions Générales.",
-    "communicationNotice": "Important: Pas de communication WhatsApp par défaut. Lisez la FAQ et les Conditions avant paiement. Attendez d'être contacté par Takalam. Pour les urgences uniquement, contactez par email."
+    "communicationNotice": "Important: Pas de communication WhatsApp par défaut. Lisez la FAQ et les Conditions avant paiement. Attendez d'être contacté par Takalam. Pour les urgences uniquement, contactez par email.",
+    "guaranteeTitle": "Remboursement si le Groupe ne se Forme Pas",
+    "guaranteeDesc": "100% remboursé si votre groupe ne se remplit pas dans les 30 jours.",
+    "guaranteeLink": "Voir la politique de remboursement"
   },
   "howItWorks": {
     "title": "Comment Ça Marche",
@@ -348,7 +354,16 @@
     "paypalIdeal": "Idéal pour les étudiants internationaux",
     "clickToEnlarge": "Cliquez pour agrandir",
     "qrModalTitle": "Scannez le QR Code pour Payer",
-    "qrModalDesc": "Scannez avec votre application bancaire pour obtenir les détails de paiement"
+    "qrModalDesc": "Scannez avec votre application bancaire pour obtenir les détails de paiement",
+    "formStep1Title": "Infos Personnelles",
+    "formStep1Desc": "Parlez-nous de vous pour personnaliser votre expérience d'apprentissage.",
+    "formStep2Title": "Forfait",
+    "formStep2Desc": "Choisissez votre forfait et votre horaire préférés.",
+    "formStep3Title": "Paiement",
+    "formStep3Desc": "Téléchargez votre preuve de paiement pour finaliser l'inscription.",
+    "nextStep": "Suivant",
+    "prevStep": "Retour",
+    "autoSaved": "Progression sauvegardée"
   },
   "footer": {
     "description": "Tutorat d'anglais personnel pour adultes. Racines marocaines, vision mondiale.",

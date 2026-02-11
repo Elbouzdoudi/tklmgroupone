@@ -147,7 +147,10 @@
     "note1": "All lessons are 1-to-1",
     "note2": "Online sessions (Zoom / Google Meet)",
     "note3": "Flexible scheduling",
-    "note4": "Prices may vary for special goals (exams, interviews)"
+    "note4": "Prices may vary for special goals (exams, interviews)",
+    "guaranteeTitle": "100% Money-Back Guarantee",
+    "guaranteeDesc": "Full refund if you cancel before your first session. No questions asked.",
+    "guaranteeLink": "View refund policy"
   },
   "groupSessions": {
     "title": "Group English",
@@ -187,7 +190,10 @@
     "howStep2": "Wait until the group is complete. Groups remain inactive until full.",
     "howStep3": "Once full, Takalam contacts all learners to confirm schedule and start date.",
     "howStep4": "If a group doesn't form, refunds apply according to Terms & Conditions.",
-    "communicationNotice": "Important: No WhatsApp communication by default. Read FAQ and Terms before payment. Wait to be contacted by Takalam. For urgent matters only, contact via email."
+    "communicationNotice": "Important: No WhatsApp communication by default. Read FAQ and Terms before payment. Wait to be contacted by Takalam. For urgent matters only, contact via email.",
+    "guaranteeTitle": "Full Refund if Group Doesn't Form",
+    "guaranteeDesc": "100% money back if your group doesn't fill within 30 days.",
+    "guaranteeLink": "View refund policy"
   },
   "howItWorks": {
     "title": "How It Works",
@@ -348,7 +354,16 @@
     "paypalIdeal": "Ideal for international students",
     "clickToEnlarge": "Click to enlarge",
     "qrModalTitle": "Scan QR Code to Pay",
-    "qrModalDesc": "Scan with your banking app to get payment details"
+    "qrModalDesc": "Scan with your banking app to get payment details",
+    "formStep1Title": "Personal Info",
+    "formStep1Desc": "Tell us about yourself so we can personalize your learning experience.",
+    "formStep2Title": "Package",
+    "formStep2Desc": "Choose your preferred learning package and schedule.",
+    "formStep3Title": "Payment",
+    "formStep3Desc": "Upload your payment proof to complete registration.",
+    "nextStep": "Next",
+    "prevStep": "Back",
+    "autoSaved": "Progress auto-saved"
   },
   "footer": {
     "description": "Personal English tutoring for adults. Moroccan roots, global mindset.",

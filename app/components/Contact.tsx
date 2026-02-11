@@ -58,6 +58,10 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showQRModal, setShowQRModal] = useState(false);
+  
+  // Multi-step form state
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 3;
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -75,6 +79,57 @@ export default function Contact() {
   });
   const [paymentScreenshot, setPaymentScreenshot] = useState<File | null>(null);
   const [paymentPreview, setPaymentPreview] = useState<string | null>(null);
+
+  // Auto-save to localStorage
+  useEffect(() => {
+    const savedData = localStorage.getItem('takalam_form_data');
+    if (savedData) {
+      try {
+        const parsed = JSON.parse(savedData);
+        setFormData(parsed);
+      } catch (e) {
+        console.error('Error loading saved form data:', e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (formData.firstName || formData.email || formData.phone) {
+      localStorage.setItem('takalam_form_data', JSON.stringify(formData));
+    }
+  }, [formData]);
+
+  // Validate current step
+  const isStep1Valid = () => {
+    return formData.firstName && formData.familyName && formData.phone && 
+           formData.email && formData.age && formData.sex && formData.country && formData.city;
+  };
+
+  const isStep2Valid = () => {
+    if (!formData.package) return false;
+    if (formData.package.startsWith('group')) {
+      return formData.groupTimeSlot && formData.groupDays;
+    }
+    return true;
+  };
+
+  const isStep3Valid = () => {
+    return paymentScreenshot !== null;
+  };
+
+  const nextStep = () => {
+    if (currentStep < totalSteps) {
+      setCurrentStep(prev => prev + 1);
+      window.scrollTo({ top: sectionRef.current?.offsetTop || 0, behavior: 'smooth' });
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(prev => prev - 1);
+      window.scrollTo({ top: sectionRef.current?.offsetTop || 0, behavior: 'smooth' });
+    }
+  };
 
   // Check if selected package is a group package or private package
   const isGroupPackage = formData.package.startsWith('group');
@@ -192,6 +247,8 @@ export default function Contact() {
       setSubmitStatus('success');
       setPaymentScreenshot(null);
       setPaymentPreview(null);
+      setCurrentStep(1);
+      localStorage.removeItem('takalam_form_data');
       setFormData({
         firstName: '',
         familyName: '',
@@ -240,25 +297,74 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Step Progress Bar - Simplified: Pay → Register → Start/Wait */}
+        {/* Multi-Step Form Progress Indicator */}
         <div
           className={`mb-10 ${isVisible ? "animate-fade-in-up delay-100" : "opacity-0"}`}
         >
-          <div className="flex items-center justify-center gap-4 sm:gap-8">
-            <div className="flex items-center gap-2">
-              <div className={`w-8 h-8 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} text-white rounded-full flex items-center justify-center font-bold text-sm`}>1</div>
-              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepPay")}</span>
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+            <div className="flex items-center justify-between max-w-2xl mx-auto">
+              {/* Step 1 */}
+              <div className="flex flex-col items-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
+                  currentStep >= 1 ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-500'
+                }`}>
+                  {currentStep > 1 ? (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  ) : '1'}
+                </div>
+                <span className={`text-xs mt-2 font-medium ${currentStep >= 1 ? 'text-green-600' : 'text-gray-400'}`}>
+                  {t("contact.formStep1Title")}
+                </span>
+              </div>
+
+              {/* Connector */}
+              <div className={`flex-1 h-1 mx-2 rounded ${currentStep > 1 ? 'bg-green-500' : 'bg-gray-200'}`}></div>
+
+              {/* Step 2 */}
+              <div className="flex flex-col items-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
+                  currentStep >= 2 ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-500'
+                }`}>
+                  {currentStep > 2 ? (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  ) : '2'}
+                </div>
+                <span className={`text-xs mt-2 font-medium ${currentStep >= 2 ? 'text-green-600' : 'text-gray-400'}`}>
+                  {t("contact.formStep2Title")}
+                </span>
+              </div>
+
+              {/* Connector */}
+              <div className={`flex-1 h-1 mx-2 rounded ${currentStep > 2 ? 'bg-green-500' : 'bg-gray-200'}`}></div>
+
+              {/* Step 3 */}
+              <div className="flex flex-col items-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
+                  currentStep >= 3 ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-500'
+                }`}>
+                  3
+                </div>
+                <span className={`text-xs mt-2 font-medium ${currentStep >= 3 ? 'text-green-600' : 'text-gray-400'}`}>
+                  {t("contact.formStep3Title")}
+                </span>
+              </div>
             </div>
-            <div className={`w-8 sm:w-16 h-0.5 ${isGroupPackage ? 'bg-blue-300' : 'bg-green-300'}`}></div>
-            <div className="flex items-center gap-2">
-              <div className={`w-8 h-8 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} text-white rounded-full flex items-center justify-center font-bold text-sm`}>2</div>
-              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{t("contact.stepRegister")}</span>
-            </div>
-            <div className={`w-8 sm:w-16 h-0.5 ${isGroupPackage ? 'bg-blue-300' : 'bg-green-300'}`}></div>
-            <div className="flex items-center gap-2">
-              <div className={`w-8 h-8 ${isGroupPackage ? 'bg-blue-600' : 'bg-green-600'} text-white rounded-full flex items-center justify-center font-bold text-sm`}>3</div>
-              <span className="text-sm font-medium text-gray-700 hidden sm:inline">{isGroupPackage ? t("contact.stepWait") : t("contact.stepStart")}</span>
-            </div>
+            
+            {/* Auto-save indicator */}
+            {(formData.firstName || formData.email) && (
+              <div className="text-center mt-4">
+                <span className="text-xs text-gray-400 flex items-center justify-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  {t("contact.autoSaved")}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -483,6 +589,19 @@ export default function Contact() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* STEP 1: Personal Information */}
+                {currentStep === 1 && (
+                  <div className="space-y-4 animate-fade-in">
+                    <div className="mb-4 p-4 bg-green-50 rounded-xl border border-green-200">
+                      <h4 className="font-semibold text-green-800 flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                        </svg>
+                        {t("contact.formStep1Title")}
+                      </h4>
+                      <p className="text-sm text-green-600 mt-1">{t("contact.formStep1Desc")}</p>
+                    </div>
+
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -620,6 +739,36 @@ export default function Contact() {
                   </div>
                 </div>
 
+                    {/* Step 1 Navigation */}
+                    <div className="flex justify-end pt-4">
+                      <button
+                        type="button"
+                        onClick={nextStep}
+                        disabled={!isStep1Valid()}
+                        className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                      >
+                        {t("contact.nextStep")}
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 2: Package Selection */}
+                {currentStep === 2 && (
+                  <div className="space-y-4 animate-fade-in">
+                    <div className="mb-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                      <h4 className="font-semibold text-blue-800 flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" />
+                        </svg>
+                        {t("contact.formStep2Title")}
+                      </h4>
+                      <p className="text-sm text-blue-600 mt-1">{t("contact.formStep2Desc")}</p>
+                    </div>
+
                 <div>
                   <label htmlFor="package" className="block text-sm font-medium text-gray-700 mb-1">
                     {t("contact.packageSelected")} <span className="text-red-500">{t("contact.required")}</span>
@@ -723,6 +872,46 @@ export default function Contact() {
                   </div>
                 )}
 
+                    {/* Step 2 Navigation */}
+                    <div className="flex justify-between pt-4">
+                      <button
+                        type="button"
+                        onClick={prevStep}
+                        className="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors flex items-center gap-2"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        {t("contact.prevStep")}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={nextStep}
+                        disabled={!isStep2Valid()}
+                        className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                      >
+                        {t("contact.nextStep")}
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* STEP 3: Payment & Submit */}
+                {currentStep === 3 && (
+                  <div className="space-y-4 animate-fade-in">
+                    <div className="mb-4 p-4 bg-amber-50 rounded-xl border border-amber-200">
+                      <h4 className="font-semibold text-amber-800 flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" />
+                        </svg>
+                        {t("contact.formStep3Title")}
+                      </h4>
+                      <p className="text-sm text-amber-600 mt-1">{t("contact.formStep3Desc")}</p>
+                    </div>
+
                 {/* Payment Screenshot Upload */}
                 <div className="space-y-3">
                   <label className="block text-sm font-medium text-gray-700">
@@ -795,10 +984,23 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
+                    {/* Step 3 Navigation & Submit */}
+                    <div className="flex justify-between pt-4">
+                      <button
+                        type="button"
+                        onClick={prevStep}
+                        className="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-colors flex items-center gap-2"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        {t("contact.prevStep")}
+                      </button>
+
                 <button
                   type="submit"
                   disabled={isSubmitting || !paymentScreenshot}
-                  className="w-full btn-primary bg-green-600 text-white py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="btn-primary bg-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -817,6 +1019,9 @@ export default function Contact() {
                     </>
                   )}
                 </button>
+                    </div>
+                  </div>
+                )}
 
               </form>
             </div>
