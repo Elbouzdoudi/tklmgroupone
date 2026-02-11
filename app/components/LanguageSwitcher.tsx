@@ -4,10 +4,42 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "../i18n/useTranslation";
 import { Locale } from "../i18n/LanguageContext";
 
-const languages: { code: Locale; label: string; flag: string }[] = [
-  { code: "en", label: "EN", flag: "🇬🇧" },
-  { code: "fr", label: "FR", flag: "🇫🇷" },
-  { code: "ar", label: "AR", flag: "🇲🇦" },
+// Flag components as SVGs for consistent rendering
+const FlagUK = () => (
+  <svg className="w-5 h-4 rounded-sm" viewBox="0 0 60 40">
+    <rect width="60" height="40" fill="#012169"/>
+    <path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" strokeWidth="6"/>
+    <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" strokeWidth="4"/>
+    <path d="M30,0 V40 M0,20 H60" stroke="#fff" strokeWidth="10"/>
+    <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" strokeWidth="6"/>
+  </svg>
+);
+
+const FlagFR = () => (
+  <svg className="w-5 h-4 rounded-sm" viewBox="0 0 60 40">
+    <rect width="20" height="40" fill="#002654"/>
+    <rect x="20" width="20" height="40" fill="#fff"/>
+    <rect x="40" width="20" height="40" fill="#CE1126"/>
+  </svg>
+);
+
+const FlagMA = () => (
+  <svg className="w-5 h-4 rounded-sm" viewBox="0 0 60 40">
+    <rect width="60" height="40" fill="#C1272D"/>
+    <path d="M30,10 L32.5,17.5 L40,17.5 L34,22.5 L36.5,30 L30,25 L23.5,30 L26,22.5 L20,17.5 L27.5,17.5 Z" fill="none" stroke="#006233" strokeWidth="1.5"/>
+  </svg>
+);
+
+const flags: Record<Locale, React.ReactNode> = {
+  en: <FlagUK />,
+  fr: <FlagFR />,
+  ar: <FlagMA />,
+};
+
+const languages: { code: Locale; label: string }[] = [
+  { code: "en", label: "EN" },
+  { code: "fr", label: "FR" },
+  { code: "ar", label: "AR" },
 ];
 
 export default function LanguageSwitcher() {
@@ -41,7 +73,7 @@ export default function LanguageSwitcher() {
         className="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium text-gray-600"
         aria-label="Select language"
       >
-        <span>{currentLang.flag}</span>
+        {flags[currentLang.code]}
         <span>{currentLang.label}</span>
         <svg
           className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
@@ -65,7 +97,7 @@ export default function LanguageSwitcher() {
                   : "text-gray-700"
               }`}
             >
-              <span>{lang.flag}</span>
+              {flags[lang.code]}
               <span>{lang.label}</span>
               {locale === lang.code && (
                 <svg className="w-4 h-4 ml-auto text-green-600" fill="currentColor" viewBox="0 0 20 20">
