@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import LanguageWrapper from "./components/LanguageWrapper";
 import CookieConsent from "./components/CookieConsent";
+import AIChatBot from "./components/AIChatBot";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -93,6 +94,7 @@ export default function RootLayout({
         <LanguageWrapper>
           {children}
           <CookieConsent />
+          <AIChatBot />
         </LanguageWrapper>
       </body>
     </html>
