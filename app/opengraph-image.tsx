@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "TAKALAM - Speak English with Confidence";
+export const alt = "Takalam English Center - Online English Courses in Morocco";
 export const size = {
   width: 1200,
   height: 630,
@@ -50,13 +50,13 @@ export default async function Image() {
           {/* Tagline */}
           <div
             style={{
-              fontSize: 48,
+              fontSize: 42,
               color: "white",
               marginBottom: 30,
               opacity: 0.95,
             }}
           >
-            Speak English with Confidence
+            Online English Courses in Morocco
           </div>
 
           {/* Description */}
@@ -68,7 +68,7 @@ export default async function Image() {
               lineHeight: 1.4,
             }}
           >
-            Personalized 1-to-1 English coaching for adults
+            Affordable courses • Live sessions • Certified teachers
           </div>
 
           {/* Features */}
@@ -79,7 +79,7 @@ export default async function Image() {
               marginTop: 50,
             }}
           >
-            {["1-on-1 Sessions", "Flexible Schedule", "100% Online"].map(
+            {["Private & Group", "All Levels", "100% Online"].map(
               (feature) => (
                 <div
                   key={feature}
@@ -111,7 +111,7 @@ export default async function Image() {
             color: "rgba(255, 255, 255, 0.7)",
           }}
         >
-          takalam.ma
+          takalamenglish.ma
         </div>
       </div>
     ),

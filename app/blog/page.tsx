@@ -3,8 +3,14 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog - English Learning Tips",
-  description: "Free English learning tips, speaking strategies, and exam preparation guides from TAKALAM.",
+  title: "Blog - English Learning Tips & Guides",
+  description: "Free English learning tips, speaking strategies, IELTS preparation guides, and confidence-building techniques from Takalam English Center Morocco.",
+  openGraph: {
+    title: "English Learning Blog | Takalam English Center",
+    description: "Free English learning tips, speaking strategies, and exam preparation guides from Takalam.",
+    type: "website",
+  },
+  keywords: ["English learning tips", "speaking practice", "IELTS preparation", "English confidence", "Morocco English blog"],
 };
 
 // Blog posts data
@@ -14,6 +20,7 @@ const blogPosts = [
     title: "5 Practical Tips to Improve Your English Speaking",
     excerpt: "Discover actionable strategies to boost your spoken English skills, even if you're starting from scratch.",
     date: "January 25, 2026",
+    dateISO: "2026-01-25",
     readTime: "5 min read",
     category: "Speaking",
     image: "/blog/speaking-tips.jpg",
@@ -23,6 +30,7 @@ const blogPosts = [
     title: "How to Overcome the Fear of Speaking English",
     excerpt: "Learn proven techniques to build confidence and speak English without anxiety or self-doubt.",
     date: "January 20, 2026",
+    dateISO: "2026-01-20",
     readTime: "4 min read",
     category: "Confidence",
     image: "/blog/confidence.jpg",
@@ -32,15 +40,75 @@ const blogPosts = [
     title: "Complete IELTS Preparation Guide for Beginners",
     excerpt: "Everything you need to know about IELTS exam structure, scoring, and preparation strategies.",
     date: "January 15, 2026",
+    dateISO: "2026-01-15",
     readTime: "8 min read",
     category: "Exam Prep",
     image: "/blog/ielts.jpg",
   },
 ];
 
+// Blog Schema for SEO
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Takalam English Learning Blog",
+  "description": "Free English learning tips, speaking strategies, and exam preparation guides from Takalam English Center Morocco.",
+  "url": "https://takalamenglish.ma/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Takalam English Center",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://takalamenglish.ma/logo.png"
+    }
+  },
+  "blogPost": blogPosts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": post.dateISO,
+    "url": `https://takalamenglish.ma/blog/${post.slug}`,
+    "author": {
+      "@type": "Person",
+      "name": "Said",
+      "jobTitle": "English Teacher"
+    }
+  }))
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://takalamenglish.ma"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://takalamenglish.ma/blog"
+    }
+  ]
+};
+
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Blog and Breadcrumb Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,6 +134,21 @@ export default function BlogPage() {
           </div>
         </div>
       </header>
+
+      {/* Breadcrumb Navigation */}
+      <nav className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Breadcrumb">
+        <ol className="flex items-center gap-2 text-sm text-gray-500">
+          <li>
+            <Link href="/" className="hover:text-green-600 transition-colors">Home</Link>
+          </li>
+          <li>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </li>
+          <li className="text-gray-900 font-medium">Blog</li>
+        </ol>
+      </nav>
 
       {/* Main Content */}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

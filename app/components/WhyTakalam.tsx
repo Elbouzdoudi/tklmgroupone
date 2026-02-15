@@ -155,12 +155,12 @@ export default function WhyTakalam() {
         >
           <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap">
             {[
-              { src: "/pexels-beardedbasturds-842980.jpg", alt: "English learner" },
-              { src: "/pexels-simon-robben-55958-614810.jpg", alt: "English learner" },
-              { src: "/pexels-mellamed-442447-1133742.jpg", alt: "English learner" },
-              { src: "/pexels-italo-melo-881954-2379004.jpg", alt: "English learner" },
-              { src: "/pexels-mattycphoto-1062280.jpg", alt: "English learner" },
-              { src: "/pexels-minan1398-713312.jpg", alt: "English learner" },
+              { src: "/pexels-beardedbasturds-842980.jpg", alt: "Takalam English learner - professional student" },
+              { src: "/pexels-simon-robben-55958-614810.jpg", alt: "Takalam English learner - confident speaker" },
+              { src: "/pexels-mellamed-442447-1133742.jpg", alt: "Takalam English learner - business professional" },
+              { src: "/pexels-italo-melo-881954-2379004.jpg", alt: "Takalam English learner - career focused" },
+              { src: "/pexels-mattycphoto-1062280.jpg", alt: "Takalam English learner - motivated adult" },
+              { src: "/pexels-minan1398-713312.jpg", alt: "Takalam English learner - aspiring communicator" },
             ].map((img, index) => (
               <div
                 key={index}

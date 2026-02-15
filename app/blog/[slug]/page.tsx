@@ -8,6 +8,7 @@ const blogPosts: Record<string, {
   title: string;
   excerpt: string;
   date: string;
+  dateISO: string;
   readTime: string;
   category: string;
   content: string;
@@ -16,6 +17,7 @@ const blogPosts: Record<string, {
     title: "5 Practical Tips to Improve Your English Speaking",
     excerpt: "Discover actionable strategies to boost your spoken English skills, even if you're starting from scratch.",
     date: "January 25, 2026",
+    dateISO: "2026-01-25",
     readTime: "5 min read",
     category: "Speaking",
     content: `
@@ -65,6 +67,7 @@ These tips are great for self-study, but nothing replaces real conversation prac
     title: "How to Overcome the Fear of Speaking English",
     excerpt: "Learn proven techniques to build confidence and speak English without anxiety or self-doubt.",
     date: "January 20, 2026",
+    dateISO: "2026-01-20",
     readTime: "4 min read",
     category: "Confidence",
     content: `
@@ -124,6 +127,7 @@ Your fluency journey starts with one conversation. Are you ready?
     title: "Complete IELTS Preparation Guide for Beginners",
     excerpt: "Everything you need to know about IELTS exam structure, scoring, and preparation strategies.",
     date: "January 15, 2026",
+    dateISO: "2026-01-15",
     readTime: "8 min read",
     category: "Exam Prep",
     content: `
@@ -228,9 +232,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://takalamenglish.ma";
+
   return {
     title: post.title,
     description: post.excerpt,
+    openGraph: {
+      title: `${post.title} | Takalam English Center`,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.date,
+      url: `${siteUrl}/blog/${slug}`,
+      siteName: "Takalam English Center",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
   };
 }
 
@@ -248,8 +267,75 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  // Article Schema for SEO
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": post.dateISO,
+    "dateModified": post.dateISO,
+    "author": {
+      "@type": "Person",
+      "name": "Said",
+      "jobTitle": "English Teacher",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Takalam English Center"
+      }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Takalam English Center",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://takalamenglish.ma/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://takalamenglish.ma/blog/${slug}`
+    }
+  };
+
+  // Breadcrumb Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://takalamenglish.ma"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://takalamenglish.ma/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.title,
+        "item": `https://takalamenglish.ma/blog/${slug}`
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Article and Breadcrumb Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -275,6 +361,29 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </div>
       </header>
+
+      {/* Breadcrumb Navigation */}
+      <nav className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-4" aria-label="Breadcrumb">
+        <ol className="flex items-center gap-2 text-sm text-gray-500">
+          <li>
+            <Link href="/" className="hover:text-green-600 transition-colors">Home</Link>
+          </li>
+          <li>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </li>
+          <li>
+            <Link href="/blog" className="hover:text-green-600 transition-colors">Blog</Link>
+          </li>
+          <li>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </li>
+          <li className="text-gray-900 font-medium truncate max-w-[200px]">{post.title}</li>
+        </ol>
+      </nav>
 
       {/* Article */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -341,7 +450,7 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="text-gray-600 mb-4 text-center">Found this helpful? Share it!</p>
           <div className="flex justify-center gap-4">
             <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://takalam.ma/blog/${slug}`)}`}
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://takalamenglish.ma/blog/${slug}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
@@ -351,7 +460,7 @@ export default async function BlogPostPage({ params }: Props) {
               </svg>
             </a>
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://takalam.ma/blog/${slug}`)}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://takalamenglish.ma/blog/${slug}`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
@@ -361,7 +470,7 @@ export default async function BlogPostPage({ params }: Props) {
               </svg>
             </a>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent(post.title + ' - https://takalam.ma/blog/' + slug)}`}
+              href={`https://wa.me/?text=${encodeURIComponent(post.title + ' - https://takalamenglish.ma/blog/' + slug)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"

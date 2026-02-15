@@ -27,13 +27,19 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm">
+          {/* Quick Links - Enhanced for SEO */}
+          <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-x-6 gap-y-3 text-sm">
             <a href="#intro-video" className="hover:text-green-400 transition-colors">
               {t("footer.about")}
             </a>
             <a href="#why-takalam" className="hover:text-green-400 transition-colors">
               {t("footer.whoItsFor")}
+            </a>
+            <a href="#private-pricing" className="hover:text-green-400 transition-colors">
+              1-on-1 Sessions
+            </a>
+            <a href="#group-sessions" className="hover:text-green-400 transition-colors">
+              Group Sessions
             </a>
             <a href="#how-it-works" className="hover:text-green-400 transition-colors">
               {t("footer.howItWorks")}

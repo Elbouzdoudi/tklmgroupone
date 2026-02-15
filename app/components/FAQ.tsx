@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useTranslation } from "../i18n/useTranslation";
 
 export default function FAQ() {
@@ -9,6 +9,37 @@ export default function FAQ() {
   const [isVisible, setIsVisible] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [activeTab, setActiveTab] = useState<"private" | "group">("private");
+
+  // FAQ Schema for SEO (JSON-LD)
+  const faqSchema = useMemo(() => {
+    const allFaqs = [
+      // Private session FAQs
+      { q: "What level of English do I need to start?", a: "Any level! Whether you're a complete beginner or advanced speaker looking to refine your skills, lessons are personalized to your current level and goals." },
+      { q: "What if I miss a scheduled session?", a: "You can reschedule with 24 hours notice at no extra cost. Sessions missed without notice are counted as completed." },
+      { q: "What equipment do I need?", a: "Just a smartphone, tablet, or computer with a stable internet connection. We use Zoom or Google Meet - both are free and easy to use." },
+      { q: "How long is each session?", a: "Each private session is 50 minutes long - enough time to make real progress while keeping you engaged and focused." },
+      { q: "Can I change my package later?", a: "Yes! You can upgrade to a larger package anytime. Contact us to discuss your options and we'll help you transition smoothly." },
+      { q: "What payment methods do you accept?", a: "We accept bank transfers (CIH Bank) and PayPal. Payment must be completed before your first session." },
+      // Group session FAQs
+      { q: "When do group sessions start?", a: "Groups start only when all seats are filled. Group of 10 starts when 10 learners register. Group of 5 starts when 5 learners register." },
+      { q: "What happens if the group doesn't fill up?", a: "If a group doesn't reach the required number of learners within 30 days, you will receive a full refund." },
+      { q: "Is there a diagnostic test for groups?", a: "Yes! After payment and once the group is complete, you'll receive a free 15-minute oral diagnostic test to assess your level before sessions begin." },
+      { q: "How do group sessions work?", a: "Group sessions are 1 hour long, held twice per week on a fixed schedule. You'll learn alongside other motivated adults at a similar level." },
+    ];
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": allFaqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,14 +90,20 @@ export default function FAQ() {
   }, [activeTab]);
 
   return (
-    <section
-      ref={sectionRef}
-      id="faq"
-      className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-white"
-    >
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div
+    <>
+      {/* FAQ Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <section
+        ref={sectionRef}
+        id="faq"
+        className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-white"
+      >
+        <div className="max-w-3xl mx-auto">
+          {/* Header */}
+          <div
           className={`text-center mb-8 ${
             isVisible ? "animate-fade-in-up" : "opacity-0"
           }`}
@@ -210,5 +247,6 @@ export default function FAQ() {
         </div>
       </div>
     </section>
+    </>
   );
 }
