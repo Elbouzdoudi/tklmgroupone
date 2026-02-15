@@ -11,13 +11,20 @@ const nextConfig: NextConfig = {
     ],
     // Enable modern formats for better compression
     formats: ['image/avif', 'image/webp'],
-    // Optimize image sizes
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    // Optimize image sizes for mobile-first
+    deviceSizes: [390, 435, 640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    // Minimize image processing
+    minimumCacheTTL: 31536000, // 1 year cache
   },
   
   // Enable compression
   compress: true,
+
+  // Experimental performance features
+  experimental: {
+    optimizeCss: true,
+  },
   
   // www to non-www redirect
   async redirects() {
@@ -36,7 +43,7 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Security headers
+  // Security and caching headers
   async headers() {
     return [
       {
@@ -53,6 +60,34 @@ const nextConfig: NextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
+          },
+        ],
+      },
+      // Cache static assets aggressively
+      {
+        source: '/(.*)\\.(jpg|jpeg|png|webp|avif|svg|ico)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/(.*)\\.(js|css)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/(.*)\\.(woff|woff2|ttf|otf)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
