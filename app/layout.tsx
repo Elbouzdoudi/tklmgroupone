@@ -72,11 +72,14 @@ export const metadata: Metadata = {
   publisher: "Takalam English Center",
   icons: {
     icon: [
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.png", sizes: "500x500", type: "image/png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "16x16", type: "image/png" },
     ],
     apple: [
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
+    shortcut: "/favicon.png",
   },
   openGraph: {
     title: "Takalam English Center | Online English Courses in Morocco",
