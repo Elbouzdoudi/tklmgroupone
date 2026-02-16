@@ -95,6 +95,24 @@ export default function GroupSessions() {
       className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-blue-50"
     >
       <div className="max-w-5xl mx-auto">
+        {/* Urgency Banner */}
+        <div
+          className={`mb-8 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl p-4 shadow-lg ${
+            isVisible ? "animate-fade-in-up" : "opacity-0"
+          }`}
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl animate-bounce">🔥</span>
+              <span className="font-bold text-lg">{t("groupSessions.urgencyTitle") || "Limited Spots Available!"}</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full">
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+              <span className="font-medium text-sm">{t("groupSessions.urgencyText") || "New groups starting this month"}</span>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div
           className={`text-center mb-8 ${
@@ -240,7 +258,7 @@ export default function GroupSessions() {
                 </p>
               </div>
 
-              {/* Seat Counter */}
+              {/* Seat Counter with Urgency */}
               <div className="mb-6">
                 <div className="flex justify-between text-sm mb-2">
                   <span className="text-gray-600">{t("groupSessions.seatsFilled")}</span>
@@ -250,13 +268,29 @@ export default function GroupSessions() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
-                    className="bg-blue-600 h-3 rounded-full transition-all duration-500"
+                    className={`h-3 rounded-full transition-all duration-500 ${
+                      pkg.totalSeats - pkg.filledSeats <= 2 
+                        ? 'bg-gradient-to-r from-red-500 to-orange-500 animate-pulse' 
+                        : 'bg-blue-600'
+                    }`}
                     style={{ width: `${(pkg.filledSeats / pkg.totalSeats) * 100}%` }}
                   ></div>
                 </div>
-                <p className="text-xs text-gray-500 mt-1 text-center">
-                  {pkg.totalSeats - pkg.filledSeats} {t("groupSessions.seatsRemaining")}
-                </p>
+                {/* Urgency message based on spots remaining */}
+                {pkg.totalSeats - pkg.filledSeats <= 2 ? (
+                  <p className="text-xs text-red-600 font-semibold mt-2 text-center flex items-center justify-center gap-1">
+                    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                    {t("groupSessions.almostFull") || "Almost full!"} {pkg.totalSeats - pkg.filledSeats} {t("groupSessions.seatsRemaining")}
+                  </p>
+                ) : pkg.totalSeats - pkg.filledSeats <= 4 ? (
+                  <p className="text-xs text-orange-600 font-medium mt-2 text-center">
+                    ⚡ {t("groupSessions.fillingFast") || "Filling fast!"} {pkg.totalSeats - pkg.filledSeats} {t("groupSessions.seatsRemaining")}
+                  </p>
+                ) : (
+                  <p className="text-xs text-gray-500 mt-1 text-center">
+                    {pkg.totalSeats - pkg.filledSeats} {t("groupSessions.seatsRemaining")}
+                  </p>
+                )}
               </div>
 
               {/* Features */}

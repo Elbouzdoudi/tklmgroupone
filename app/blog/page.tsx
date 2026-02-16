@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { client } from "@/sanity/lib/client";
+import imageUrlBuilder from "@sanity/image-url";
 
 export const metadata: Metadata = {
   title: "Blog - English Learning Tips & Guides",
@@ -13,100 +15,84 @@ export const metadata: Metadata = {
   keywords: ["English learning tips", "speaking practice", "IELTS preparation", "English confidence", "Morocco English blog"],
 };
 
-// Blog posts data
-const blogPosts = [
-  {
-    slug: "common-english-mistakes-arabic-speakers",
-    title: "10 Common English Mistakes Arabic Speakers Make (And How to Fix Them)",
-    excerpt: "Learn about the most frequent errors Arabic speakers make in English and practical tips to overcome them.",
-    date: "February 10, 2026",
-    dateISO: "2026-02-10",
-    readTime: "8 min read",
-    category: "Grammar",
-    image: "/blog/grammar.png",
-  },
-  {
-    slug: "ielts-vs-toefl-which-test-should-you-take",
-    title: "IELTS vs TOEFL: Which English Test Should You Take?",
-    excerpt: "A comprehensive comparison of IELTS and TOEFL to help you choose the right English proficiency test for your goals.",
-    date: "February 5, 2026",
-    dateISO: "2026-02-05",
-    readTime: "6 min read",
-    category: "Exam Prep",
-    image: "/blog/exams.png",
-  },
-  {
-    slug: "how-to-learn-english-fast-morocco",
-    title: "How to Learn English Fast in Morocco: A Complete Guide",
-    excerpt: "Discover the best methods and resources to learn English quickly in Morocco, from online courses to immersion techniques.",
-    date: "January 30, 2026",
-    dateISO: "2026-01-30",
-    readTime: "7 min read",
-    category: "Learning Tips",
-    image: "/blog/learning.png",
-  },
-  {
-    slug: "5-tips-to-improve-english-speaking",
-    title: "5 Practical Tips to Improve Your English Speaking",
-    excerpt: "Discover actionable strategies to boost your spoken English skills, even if you're starting from scratch.",
-    date: "January 25, 2026",
-    dateISO: "2026-01-25",
-    readTime: "5 min read",
-    category: "Speaking",
-    image: "/blog/speaking-tips.png",
-  },
-  {
-    slug: "overcome-fear-of-speaking-english",
-    title: "How to Overcome the Fear of Speaking English",
-    excerpt: "Learn proven techniques to build confidence and speak English without anxiety or self-doubt.",
-    date: "January 20, 2026",
-    dateISO: "2026-01-20",
-    readTime: "4 min read",
-    category: "Confidence",
-    image: "/blog/confidence.png",
-  },
-  {
-    slug: "ielts-preparation-guide",
-    title: "Complete IELTS Preparation Guide for Beginners",
-    excerpt: "Everything you need to know about IELTS exam structure, scoring, and preparation strategies.",
-    date: "January 15, 2026",
-    dateISO: "2026-01-15",
-    readTime: "8 min read",
-    category: "Exam Prep",
-    image: "/blog/ielts.png",
-  },
+// Image URL builder
+const builder = imageUrlBuilder(client);
+function urlFor(source: any) {
+  // Only build URL if the source has an asset reference
+  if (source && source.asset) {
+    return builder.image(source);
+  }
+  return null;
+}
+
+// Helper to safely get image URL
+function getImageUrl(source: any, width: number, height: number) {
+  const url = urlFor(source);
+  if (url) {
+    return url.width(width).height(height).url();
+  }
+  return null;
+}
+
+// Fetch posts from Sanity
+async function getPosts() {
+  const query = `*[_type == "post"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    mainImage,
+    publishedAt,
+    "excerpt": pt::text(body[0..2]),
+    "category": categories[0]->title,
+    "author": author->name
+  }`;
+  
+  return client.fetch(query, {}, { next: { revalidate: 60 } });
+}
+
+// Format date
+function formatDate(dateString: string) {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+// Estimate read time
+function getReadTime(excerpt: string) {
+  const words = excerpt?.split(" ").length || 0;
+  const minutes = Math.max(3, Math.ceil(words / 50));
+  return `${minutes} min read`;
+}
+
+// Fallback images for posts without mainImage
+const fallbackImages = [
+  "/blog/speaking-tips.webp",
+  "/blog/confidence.webp",
+  "/blog/grammar.webp",
+  "/blog/ielts.webp",
+  "/blog/learning.webp",
+  "/blog/exams.webp",
 ];
 
-// Blog Schema for SEO
-const blogSchema = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Takalam English Learning Blog",
-  "description": "Free English learning tips, speaking strategies, and exam preparation guides from Takalam English Center Morocco.",
-  "url": "https://takalamenglish.ma/blog",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Takalam English Center",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://takalamenglish.ma/logo.png"
-    }
-  },
-  "blogPost": blogPosts.map(post => ({
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "description": post.excerpt,
-    "datePublished": post.dateISO,
-    "url": `https://takalamenglish.ma/blog/${post.slug}`,
-    "author": {
-      "@type": "Person",
-      "name": "Said",
-      "jobTitle": "English Teacher"
-    }
-  }))
-};
+// Define post type
+interface SanityPost {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  mainImage?: any;
+  publishedAt: string;
+  excerpt: string;
+  category: string;
+  author: string;
+}
 
-// Breadcrumb Schema
+// NOTE: Removed static blogPosts array - now fetching from Sanity CMS
+
+// Breadcrumb Schema (static)
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -126,7 +112,38 @@ const breadcrumbSchema = {
   ]
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getPosts();
+  
+  // Blog Schema for SEO (dynamic, based on fetched posts)
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Takalam English Learning Blog",
+    "description": "Free English learning tips, speaking strategies, and exam preparation guides from Takalam English Center Morocco.",
+    "url": "https://takalamenglish.ma/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Takalam English Center",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://takalamenglish.ma/logo.png"
+      }
+    },
+    "blogPost": posts.map((post: SanityPost) => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt,
+      "datePublished": post.publishedAt,
+      "url": `https://takalamenglish.ma/blog/${post.slug?.current}`,
+      "author": {
+        "@type": "Person",
+        "name": post.author || "Said",
+        "jobTitle": "English Teacher"
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Blog and Breadcrumb Schemas */}
@@ -197,38 +214,47 @@ export default function BlogPage() {
 
         {/* Blog Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
+          {posts.map((post: SanityPost, index: number) => (
             <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
+              key={post._id}
+              href={`/blog/${post.slug?.current}`}
               className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300"
             >
               {/* Blog Post Image */}
-              <div className="h-48 relative overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+              <div className="h-48 relative overflow-hidden bg-gradient-to-br from-green-100 to-emerald-100">
+                {getImageUrl(post.mainImage, 400, 200) ? (
+                  <Image
+                    src={getImageUrl(post.mainImage, 400, 200)!}
+                    alt={post.mainImage?.alt || post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <Image
+                    src={fallbackImages[index % fallbackImages.length]}
+                    alt={post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                )}
               </div>
               
               {/* Content */}
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="px-2 py-1 bg-green-100 text-green-700 rounded-md text-xs font-medium">
-                    {post.category}
+                    {post.category || "Learning Tips"}
                   </span>
-                  <span className="text-gray-400 text-sm">{post.readTime}</span>
+                  <span className="text-gray-400 text-sm">{getReadTime(post.excerpt)}</span>
                 </div>
-                <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
+                <h2 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors line-clamp-2">
                   {post.title}
                 </h2>
                 <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                   {post.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-400 text-sm">{post.date}</span>
+                  <span className="text-gray-400 text-sm">{formatDate(post.publishedAt)}</span>
                   <span className="text-green-600 font-medium text-sm group-hover:gap-2 flex items-center gap-1 transition-all">
                     Read more
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -240,6 +266,13 @@ export default function BlogPage() {
             </Link>
           ))}
         </div>
+
+        {/* Empty State */}
+        {posts.length === 0 && (
+          <div className="text-center py-16">
+            <p className="text-gray-500 text-lg">No blog posts yet. Check back soon!</p>
+          </div>
+        )}
 
         {/* CTA Section */}
         <div className="mt-16 bg-gradient-to-br from-green-600 to-green-700 rounded-2xl p-8 text-center text-white">

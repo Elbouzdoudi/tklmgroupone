@@ -405,10 +405,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "Is there a free trial or diagnostic test?",
+      "name": "Is there a diagnostic test included?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For group sessions, you receive a free 15-minute oral diagnostic test after payment and once the group is complete. This helps assess your level before sessions begin."
+        "text": "Yes! After enrollment and payment, you receive a complimentary 15-minute oral diagnostic test with one of our tutors. This helps assess your level and customize your learning plan."
       }
     },
     {

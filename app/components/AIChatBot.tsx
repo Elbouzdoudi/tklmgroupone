@@ -25,20 +25,20 @@ const faqKnowledge = {
     {
       category: "getting-started",
       keywords: ["level", "beginner", "advanced", "start", "english level", "what level", "a1", "a2", "b1", "b2", "c1", "c2", "never studied", "no english", "zero"],
-      answer: "🎯 Any level is welcome! Whether you're:\n• Complete beginner (A0-A1)\n• Elementary (A2)\n• Intermediate (B1-B2)\n• Advanced (C1-C2)\n\nLessons are 100% personalized to YOUR current level and goals. We start with a free diagnostic test to find exactly where you are.",
+      answer: "🎯 Any level is welcome! Whether you're:\n• Complete beginner (A0-A1)\n• Elementary (A2)\n• Intermediate (B1-B2)\n• Advanced (C1-C2)\n\nLessons are 100% personalized to YOUR current level and goals. After enrollment, you'll receive a diagnostic test with a tutor to find exactly where you are.",
       followUp: ["How does the diagnostic test work?", "What are the prices?", "How do I register?"]
     },
     {
       category: "getting-started",
       keywords: ["how to start", "register", "sign up", "join", "enroll", "begin", "first step", "get started"],
-      answer: "🚀 Getting started is easy!\n\n1️⃣ Fill out the registration form on our website\n2️⃣ Choose your package (private or group)\n3️⃣ Complete payment (bank transfer or PayPal)\n4️⃣ Upload payment proof in the form\n5️⃣ Receive your free diagnostic test\n6️⃣ Start learning!\n\nThe whole process takes less than 10 minutes!",
+      answer: "🚀 Getting started is easy!\n\n1️⃣ Fill out the registration form on our website\n2️⃣ Choose your package (private or group)\n3️⃣ Complete payment (bank transfer or PayPal)\n4️⃣ Upload payment proof in the form\n5️⃣ Get your 15-min oral diagnostic test with a tutor\n6️⃣ Start learning!\n\nThe whole process takes less than 10 minutes!",
       actions: [{ label: "📝 Register Now", action: "scroll", href: "#contact" }],
       followUp: ["What payment methods do you accept?", "What are the prices?"]
     },
     {
       category: "getting-started",
       keywords: ["diagnostic", "test", "assessment", "level test", "placement", "evaluate"],
-      answer: "🧪 After payment, you'll receive a FREE 15-minute oral diagnostic test:\n\n✅ Conducted via Zoom/Google Meet\n✅ Assesses speaking, listening & vocabulary\n✅ No written tests - purely conversational\n✅ Results help customize your learning plan\n✅ No pressure - it's just to help us help you!",
+      answer: "🧪 After payment, you'll receive a 15-minute oral diagnostic test as a bonus:\n\n✅ Conducted live with one of our tutors\n✅ Via Zoom/Google Meet\n✅ Assesses speaking, listening & vocabulary\n✅ No written tests - purely conversational\n✅ Results help customize your learning plan\n✅ No pressure - it's just to help us help you!",
       followUp: ["When do sessions start?", "Who is the teacher?"]
     },
     // PRICING
@@ -797,26 +797,32 @@ export default function AIChatBot() {
 
   return (
     <>
-      {/* Floating Buttons Container */}
-      <div className={`fixed bottom-6 ${isRTL ? "left-6" : "right-6"} z-50 flex flex-col gap-4 items-center`}>
+      {/* Floating Buttons Container - responsive positioning */}
+      <div className={`fixed bottom-4 sm:bottom-6 ${isRTL ? "left-4 sm:left-6" : "right-4 sm:right-6"} z-50 flex flex-col gap-3 sm:gap-4 items-center`}>
+        {/* Live Status Indicator - hidden on small mobile */}
+        <div className="hidden sm:flex items-center gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg text-xs font-medium text-gray-700 border border-gray-100">
+          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          {isRTL ? "متصل الآن • نرد خلال دقائق" : "Online • Reply in minutes"}
+        </div>
+
         {/* WhatsApp Button */}
         <a
           href="https://wa.me/212722774753?text=Hi%20Takalam!%20I'm%20interested%20in%20learning%20English."
           target="_blank"
           rel="noopener noreferrer"
-          className="relative w-16 h-16 group"
+          className="relative w-14 h-14 sm:w-16 sm:h-16 group"
           aria-label="Contact us on WhatsApp"
         >
           {/* Outer glow ring */}
           <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-30 animate-ping"></span>
           {/* Button */}
           <span className="relative w-full h-full bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white rounded-full shadow-lg hover:shadow-2xl hover:shadow-green-500/40 hover:scale-110 transition-all duration-300 flex items-center justify-center border-2 border-white/30">
-            <svg className="w-8 h-8 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-7 h-7 sm:w-8 sm:h-8 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
           </span>
-          {/* Tooltip */}
-          <span className={`absolute ${isRTL ? "left-20" : "right-20"} top-1/2 -translate-y-1/2 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm font-medium px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-xl`}>
+          {/* Tooltip - hidden on mobile */}
+          <span className={`hidden sm:block absolute ${isRTL ? "left-20" : "right-20"} top-1/2 -translate-y-1/2 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm font-medium px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-xl`}>
             💬 Chat on WhatsApp
             <span className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? "-left-2" : "-right-2"} border-8 border-transparent ${isRTL ? "border-r-gray-900" : "border-l-gray-900"}`}></span>
           </span>
@@ -825,7 +831,7 @@ export default function AIChatBot() {
         {/* AI Chat Bot Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-16 h-16 group"
+          className="relative w-14 h-14 sm:w-16 sm:h-16 group"
           aria-label="Open chat"
         >
           {/* Outer animated ring - only show when closed */}
@@ -835,13 +841,13 @@ export default function AIChatBot() {
           {/* Button */}
           <span className={`relative w-full h-full ${isOpen ? 'bg-gradient-to-br from-red-500 to-red-600' : 'bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500'} text-white rounded-full shadow-lg hover:shadow-2xl hover:shadow-emerald-500/40 hover:scale-110 transition-all duration-300 flex items-center justify-center border-2 border-white/30`}>
             {isOpen ? (
-              <svg className="w-7 h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
               <>
                 {/* Modern AI/Sparkle icon */}
-                <svg className="w-8 h-8 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-7 h-7 sm:w-8 sm:h-8 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
                 </svg>
               </>
@@ -849,12 +855,12 @@ export default function AIChatBot() {
           </span>
           {/* Notification badge - only when closed */}
           {!isOpen && (
-            <span className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-bounce flex items-center justify-center text-[10px] font-bold shadow-lg border-2 border-white">
+            <span className="absolute -top-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-bounce flex items-center justify-center text-[9px] sm:text-[10px] font-bold shadow-lg border-2 border-white">
               1
             </span>
           )}
-          {/* Tooltip */}
-          <span className={`absolute ${isRTL ? "left-20" : "right-20"} top-1/2 -translate-y-1/2 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm font-medium px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-xl`}>
+          {/* Tooltip - hidden on mobile */}
+          <span className={`hidden sm:block absolute ${isRTL ? "left-20" : "right-20"} top-1/2 -translate-y-1/2 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm font-medium px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap pointer-events-none shadow-xl`}>
             {isOpen ? '✕ Close' : '✨ Ask AI Assistant'}
             <span className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? "-left-2" : "-right-2"} border-8 border-transparent ${isRTL ? "border-r-gray-900" : "border-l-gray-900"}`}></span>
           </span>

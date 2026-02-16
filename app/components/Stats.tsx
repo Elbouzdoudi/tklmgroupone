@@ -3,10 +3,43 @@
 import { useRef, useState, useEffect } from "react";
 import { useTranslation } from "../i18n/useTranslation";
 
+// Animated number counter hook
+function useCountUp(end: number, duration: number = 2000, start: boolean = false) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+    
+    let startTime: number | null = null;
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeOutQuart * end));
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    
+    requestAnimationFrame(animate);
+  }, [end, duration, start]);
+
+  return count;
+}
+
 export default function Stats() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  // Animated counters
+  const studentsCount = useCountUp(500, 2000, isVisible);
+  const hoursCount = useCountUp(2000, 2500, isVisible);
+  const satisfactionCount = useCountUp(98, 1500, isVisible);
+  const ratingCount = useCountUp(49, 1500, isVisible); // 4.9 * 10
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -27,7 +60,7 @@ export default function Stats() {
 
   const stats = [
     {
-      number: "50+",
+      number: `${studentsCount}+`,
       label: t("stats.students"),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,7 +69,7 @@ export default function Stats() {
       ),
     },
     {
-      number: "500+",
+      number: `${hoursCount}+`,
       label: t("stats.hours"),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,7 +78,7 @@ export default function Stats() {
       ),
     },
     {
-      number: "98%",
+      number: `${satisfactionCount}%`,
       label: t("stats.satisfaction"),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +87,7 @@ export default function Stats() {
       ),
     },
     {
-      number: "4.9",
+      number: `${(ratingCount / 10).toFixed(1)}`,
       label: t("stats.rating"),
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,7 +100,7 @@ export default function Stats() {
   return (
     <section
       ref={sectionRef}
-      className="py-16 px-4 sm:px-6 lg:px-8 bg-green-600"
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600"
     >
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -79,10 +112,10 @@ export default function Stats() {
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl text-white mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl text-white mb-4 backdrop-blur-sm">
                 {stat.icon}
               </div>
-              <div className="text-4xl sm:text-5xl font-bold text-white mb-2">
+              <div className="text-4xl sm:text-5xl font-bold text-white mb-2 tabular-nums">
                 {stat.number}
               </div>
               <div className="text-green-100 font-medium">

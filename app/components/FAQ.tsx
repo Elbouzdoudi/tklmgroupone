@@ -23,7 +23,7 @@ export default function FAQ() {
       // Group session FAQs
       { q: "When do group sessions start?", a: "Groups start only when all seats are filled. Group of 10 starts when 10 learners register. Group of 5 starts when 5 learners register." },
       { q: "What happens if the group doesn't fill up?", a: "If a group doesn't reach the required number of learners within 30 days, you will receive a full refund." },
-      { q: "Is there a diagnostic test for groups?", a: "Yes! After payment and once the group is complete, you'll receive a free 15-minute oral diagnostic test to assess your level before sessions begin." },
+      { q: "Is there a diagnostic test for groups?", a: "Yes! After payment and once the group is complete, you'll receive a 15-minute oral diagnostic test with a tutor to assess your level before sessions begin." },
       { q: "How do group sessions work?", a: "Group sessions are 1 hour long, held twice per week on a fixed schedule. You'll learn alongside other motivated adults at a similar level." },
     ];
 

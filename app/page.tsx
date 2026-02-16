@@ -6,12 +6,16 @@ import WhyTakalam from "./components/WhyTakalam";
 import WhatYouGet from "./components/WhatYouGet";
 import Pricing from "./components/Pricing";
 import GroupSessions from "./components/GroupSessions";
+import ComparePlans from "./components/ComparePlans";
 import HowItWorks from "./components/HowItWorks";
+import HowToPrepare from "./components/HowToPrepare";
 import Testimonials from "./components/Testimonials";
 import Stats from "./components/Stats";
+import ProgressTracker from "./components/ProgressTracker";
 import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 
 export default function Home() {
   return (
@@ -39,12 +43,21 @@ export default function Home() {
         {/* Group Sessions - equal visual importance */}
         <GroupSessions />
         
+        {/* Compare Plans - side by side comparison */}
+        <ComparePlans />
+        
         {/* How It Works - parallel flows */}
         <HowItWorks />
+        
+        {/* How to Prepare for Learning */}
+        <HowToPrepare />
         
         {/* Social Proof & Conversion */}
         <Testimonials />
         <Stats />
+        
+        {/* Progress Tracker Preview */}
+        <ProgressTracker />
         
         {/* FAQ - with tabs for Private/Group */}
         <FAQ />
@@ -53,6 +66,9 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      
+      {/* Exit Intent Popup - captures leaving visitors */}
+      <ExitIntentPopup />
     </>
   );
 }
