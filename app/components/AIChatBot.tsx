@@ -155,7 +155,7 @@ const faqKnowledge = {
     {
       category: "contact",
       keywords: ["whatsapp", "contact", "communicate", "message", "call", "email", "reach", "support"],
-      answer: "📞 How to reach us:\n\n**Email (preferred):**\ntakalamenglishcenter@gmail.com\n\n**Important notes:**\n❌ No WhatsApp communication by default\n✅ After payment, wait to be contacted by Takalam\n✅ Check email for session confirmations\n\n⚡ Response time: Within 24 hours (usually faster!)",
+      answer: "📞 How to reach us:\n\n**WhatsApp:**\n+212 722 774 753\n\n**Email:**\ntakalamenglishcenter@gmail.com\n\n✅ We're available anytime!\n✅ Questions before or after registration\n✅ WhatsApp or email - your choice!\n\n⚡ Response time: Within a few hours (usually faster!)",
       followUp: ["How do I register?", "What's the payment process?"]
     },
     // PACKAGE CHANGES
@@ -298,7 +298,7 @@ const faqKnowledge = {
     {
       category: "contact",
       keywords: ["whatsapp", "contact", "communiquer", "message", "appeler", "email", "joindre", "support"],
-      answer: "📞 Comment nous joindre :\n\n**Email (préféré) :**\ntakalamenglishcenter@gmail.com\n\n**Notes importantes :**\n❌ Pas de WhatsApp par défaut\n✅ Après paiement, attendez d'être contacté par Takalam\n✅ Vérifiez vos emails pour les confirmations\n\n⚡ Temps de réponse : Sous 24 heures (souvent plus rapide !)",
+      answer: "📞 Comment nous joindre :\n\n**WhatsApp :**\n+212 722 774 753\n\n**Email :**\ntakalamenglishcenter@gmail.com\n\n✅ Nous sommes disponibles à tout moment !\n✅ Questions avant ou après l'inscription\n✅ WhatsApp ou email - c'est votre choix !\n\n⚡ Temps de réponse : En quelques heures (souvent plus rapide !)",
       followUp: ["Comment m'inscrire?", "Comment se passe le paiement?"]
     },
     // SALUTATIONS
@@ -427,7 +427,7 @@ const faqKnowledge = {
     {
       category: "contact",
       keywords: ["واتساب", "اتصال", "تواصل", "رسالة", "اتصل", "إيميل", "دعم"],
-      answer: "📞 كيف تتواصل معنا:\n\n**الإيميل (مفضل):**\ntakalamenglishcenter@gmail.com\n\n**ملاحظات مهمة:**\n❌ لا واتساب بشكل افتراضي\n✅ بعد الدفع، انتظر أن نتواصل معك\n✅ تحقق من إيميلك للتأكيدات\n\n⚡ وقت الرد: خلال 24 ساعة (عادة أسرع!)",
+      answer: "📞 كيف تتواصل معنا:\n\n**واتساب:**\n+212 722 774 753\n\n**الإيميل:**\ntakalamenglishcenter@gmail.com\n\n✅ نحن متاحون في أي وقت!\n✅ أسئلة قبل أو بعد التسجيل\n✅ واتساب أو إيميل - اختيارك!\n\n⚡ وقت الرد: خلال ساعات قليلة (عادة أسرع!)",
       followUp: ["كيف أسجل؟", "ما هي عملية الدفع؟"]
     },
     // التحيات
