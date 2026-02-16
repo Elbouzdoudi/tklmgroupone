@@ -26,10 +26,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/ielts`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/business-english`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
   ];
 
   // Blog posts - add dynamically if you have a CMS
   const blogPosts = [
+    {
+      url: `${baseUrl}/blog/common-english-mistakes-arabic-speakers`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/ielts-vs-toefl-which-test-should-you-take`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/how-to-learn-english-fast-morocco`,
+      lastModified: currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
     {
       url: `${baseUrl}/blog/5-tips-to-improve-english-speaking`,
       lastModified: currentDate,

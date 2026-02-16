@@ -216,6 +216,400 @@ At TAKALAM, we offer targeted IELTS preparation focused on the Speaking and Writ
 Ready to achieve your IELTS goals?
     `,
   },
+  "how-to-learn-english-fast-morocco": {
+    title: "How to Learn English Fast in Morocco: A Complete Guide",
+    excerpt: "Discover the best methods and resources to learn English quickly in Morocco, from online courses to immersion techniques.",
+    date: "January 30, 2026",
+    dateISO: "2026-01-30",
+    readTime: "7 min read",
+    category: "Learning Tips",
+    content: `
+## Why English Matters in Morocco
+
+English is becoming increasingly important in Morocco. Whether you're looking for better job opportunities, planning to study abroad, or want to connect with the global community, English opens doors.
+
+The good news? You can learn English faster than you think—if you use the right approach.
+
+## The Problem with Traditional English Classes in Morocco
+
+Many Moroccans spend years in English classes but still struggle to speak. Here's why traditional methods often fail:
+
+- **Large class sizes** - 20-30 students means minimal speaking time
+- **Focus on grammar** - Rules without practice don't build fluency
+- **Moroccan Arabic interference** - Teachers don't address Arabic-specific challenges
+- **No personalization** - Everyone follows the same curriculum
+
+## The Fastest Way to Learn English
+
+Research shows that **active speaking practice** is the fastest way to fluency. Here's a proven approach:
+
+### 1. Prioritize Speaking (50%+ of your study time)
+
+Reading and writing are important, but speaking is the skill that matters most. Aim to speak English for at least 30 minutes daily.
+
+**How to practice speaking in Morocco:**
+- Online tutoring (like Takalam!)
+- Language exchange with tourists
+- Speaking clubs in major cities
+- Talking to yourself (yes, it works!)
+
+### 2. Consume English Content Daily
+
+Immerse yourself even without leaving Morocco:
+
+- **Netflix/YouTube** - Watch with English subtitles
+- **Podcasts** - Listen during commute
+- **Social media** - Follow English accounts
+- **News** - Read BBC, CNN instead of Moroccan sites
+
+### 3. Learn Vocabulary in Context
+
+Don't memorize word lists. Learn words as you encounter them in real content:
+
+- Write down new words with example sentences
+- Review them using spaced repetition apps (Anki, Quizlet)
+- Try to use each new word in conversation
+
+### 4. Focus on Pronunciation Early
+
+Arabic and English have very different sounds. Common challenges for Moroccans:
+
+- **P vs B** - "park" vs "bark"
+- **Th sounds** - "think" vs "sink"
+- **V sound** - doesn't exist in Arabic
+- **Word stress** - English stresses certain syllables
+
+Work on these early to avoid fossilizing bad habits.
+
+## Best Resources for Moroccans Learning English
+
+### Free Resources
+- Duolingo (good for beginners)
+- BBC Learning English
+- YouTube channels (Rachel's English, EngVid)
+- English podcasts
+
+### Paid Options
+- Online tutoring (most effective)
+- Language schools (Casablanca, Rabat)
+- Apps like Cambly, iTalki
+
+## How Long Does It Take?
+
+With consistent daily practice:
+- **3-6 months** - Basic conversational ability
+- **1 year** - Comfortable in most situations
+- **2+ years** - Near-native fluency
+
+The key is consistency. 30 minutes daily beats 3 hours weekly.
+
+## Your Action Plan
+
+1. **Today**: Commit to 30 minutes of English daily
+2. **This week**: Find a speaking partner or tutor
+3. **This month**: Build a consistent routine
+4. **3 months**: Evaluate progress and adjust
+
+## Ready to Fast-Track Your English?
+
+At Takalam, we specialize in helping Moroccans speak English confidently. Our personalized approach focuses on what you need, not generic lessons. Start with a free trial lesson today!
+    `,
+  },
+  "ielts-vs-toefl-which-test-should-you-take": {
+    title: "IELTS vs TOEFL: Which English Test Should You Take?",
+    excerpt: "A comprehensive comparison of IELTS and TOEFL to help you choose the right English proficiency test for your goals.",
+    date: "February 5, 2026",
+    dateISO: "2026-02-05",
+    readTime: "6 min read",
+    category: "Exam Prep",
+    content: `
+## Making the Right Choice
+
+If you're planning to study abroad or immigrate, you'll likely need to take an English proficiency test. The two biggest options are IELTS and TOEFL. But which one should you choose?
+
+## Quick Overview
+
+| Feature | IELTS | TOEFL |
+|---------|-------|-------|
+| Full Name | International English Language Testing System | Test of English as a Foreign Language |
+| Developer | British Council, IDP, Cambridge | ETS (American) |
+| Accent | British, Australian, American | Primarily American |
+| Score Range | 0-9 bands | 0-120 points |
+| Test Duration | ~2 hours 45 minutes | ~3 hours |
+
+## Test Format Comparison
+
+### Listening
+
+**IELTS Listening (30 minutes)**
+- 4 recordings
+- Mix of accents (British, Australian, American)
+- Paper-based or computer-based
+- You write answers while listening
+
+**TOEFL Listening (41-57 minutes)**
+- Academic lectures and conversations
+- Primarily American accent
+- Computer-based only
+- Take notes, then answer questions
+
+### Reading
+
+**IELTS Reading (60 minutes)**
+- 3 passages, 40 questions
+- Various question types (matching, fill-in-the-blank, etc.)
+- General Training or Academic versions
+
+**TOEFL Reading (54-72 minutes)**
+- 3-4 passages, 30-40 questions
+- All multiple choice
+- Academic content only
+
+### Writing
+
+**IELTS Writing (60 minutes)**
+- Task 1: Describe a chart/graph OR write a letter (150 words)
+- Task 2: Essay (250 words)
+- Handwritten or typed
+
+**TOEFL Writing (50 minutes)**
+- Task 1: Integrated (read, listen, write)
+- Task 2: Independent essay
+- Typed only
+
+### Speaking
+
+**IELTS Speaking (11-14 minutes)**
+- Face-to-face with examiner
+- 3 parts: interview, long turn, discussion
+- More conversational
+
+**TOEFL Speaking (17 minutes)**
+- Speak into a computer microphone
+- 4 tasks: independent and integrated
+- More structured
+
+## Which Test Should You Choose?
+
+### Choose IELTS If:
+- You're applying to UK, Australian, or Canadian universities
+- You prefer face-to-face speaking tests
+- You're applying for UK/Australian immigration
+- You want handwriting option
+- You're more comfortable with British English
+
+### Choose TOEFL If:
+- You're applying to American universities
+- You're comfortable with computer-based testing
+- You prefer multiple choice questions
+- You're applying to institutions that specifically require TOEFL
+
+## Acceptance
+
+**Important**: Most universities accept BOTH tests! Check your target institution's requirements, but don't assume one is better than the other.
+
+For immigration:
+- **UK** - IELTS for visas (TOEFL not accepted)
+- **Canada** - Both accepted for study permits; IELTS for PR
+- **Australia** - IELTS preferred for immigration
+- **USA** - TOEFL common, but many accept IELTS
+
+## Score Comparison
+
+| IELTS Band | TOEFL Score | Level |
+|------------|-------------|-------|
+| 9.0 | 118-120 | Expert |
+| 8.5 | 115-117 | Very High |
+| 8.0 | 110-114 | Very Good |
+| 7.5 | 102-109 | Good |
+| 7.0 | 94-101 | Good |
+| 6.5 | 79-93 | Competent |
+| 6.0 | 60-78 | Competent |
+
+## Preparation Tips for Both Tests
+
+1. **Know the format** - Familiarity reduces anxiety
+2. **Practice under timed conditions** - Time management is crucial
+3. **Focus on your weakest section** - Improve where you need it most
+4. **Get feedback** - A teacher can identify blind spots
+5. **Take practice tests** - Official practice tests are best
+
+## Final Recommendation
+
+If you're unsure, take sample tests of both and see which format suits you better. Your score might vary between the two tests based on your strengths.
+
+At Takalam, we help students prepare for both IELTS and TOEFL, with special focus on the Speaking and Writing sections where personal coaching makes the biggest difference.
+    `,
+  },
+  "common-english-mistakes-arabic-speakers": {
+    title: "10 Common English Mistakes Arabic Speakers Make (And How to Fix Them)",
+    excerpt: "Learn about the most frequent errors Arabic speakers make in English and practical tips to overcome them.",
+    date: "February 10, 2026",
+    dateISO: "2026-02-10",
+    readTime: "8 min read",
+    category: "Grammar",
+    content: `
+## Why Arabic Speakers Struggle with English
+
+Arabic and English are very different languages. Arabic is a Semitic language with different sentence structures, sounds, and writing systems. These differences create predictable challenges for Arabic speakers learning English.
+
+The good news? Once you're aware of these common mistakes, you can actively work to correct them.
+
+## 1. Pronunciation: P vs B
+
+**The Problem**: Arabic doesn't have the "P" sound, only "B."
+
+**Common Mistakes**:
+- "I need to bark my car" (park)
+- "Can I borrow your ben?" (pen)
+
+**The Fix**: Practice with minimal pairs:
+- park/bark
+- pin/bin
+- pat/bat
+
+Place your hand in front of your mouth. You should feel a strong puff of air for "P" but not for "B."
+
+## 2. The "TH" Sounds
+
+**The Problem**: Arabic doesn't have the English "th" sounds (voiced and voiceless).
+
+**Common Mistakes**:
+- "I sink so" instead of "I think so"
+- "Dis is good" instead of "This is good"
+
+**The Fix**: Stick your tongue between your teeth for "th" sounds. Practice:
+- think, thing, third (voiceless - like blowing air)
+- this, that, the (voiced - with vibration)
+
+## 3. Missing Articles (A, An, The)
+
+**The Problem**: Arabic has articles but they work differently than English articles.
+
+**Common Mistakes**:
+- "I am teacher" instead of "I am a teacher"
+- "She went to hospital" instead of "She went to the hospital"
+
+**The Fix**: Remember:
+- Use "a/an" when mentioning something for the first time
+- Use "the" when both speaker and listener know what you're referring to
+- Use "a" before consonant sounds, "an" before vowel sounds
+
+## 4. Word Order Problems
+
+**The Problem**: Arabic puts adjectives after nouns; English puts them before.
+
+**Common Mistakes**:
+- "I have a car red" instead of "I have a red car"
+- "This is book interesting" instead of "This is an interesting book"
+
+**The Fix**: Remember: In English, adjectives come BEFORE the noun.
+- Big house (not house big)
+- Beautiful weather (not weather beautiful)
+
+## 5. Using "Is" with Every Verb
+
+**The Problem**: Arabic uses "is/are" differently in sentences.
+
+**Common Mistakes**:
+- "He is go to school" instead of "He goes to school"
+- "She is want coffee" instead of "She wants coffee"
+
+**The Fix**: In English, don't use "is/are" with action verbs:
+- He goes to school
+- She wants coffee
+- They play football
+
+Use "is/are" only for:
+- Descriptions: He is tall
+- Continuous actions: He is going now
+
+## 6. Confusing Present Simple and Present Continuous
+
+**The Problem**: Arabic tenses work differently.
+
+**Common Mistakes**:
+- "I am understanding" instead of "I understand"
+- "She is having a car" instead of "She has a car"
+
+**The Fix**: Use Present Simple for:
+- Facts: Water boils at 100°C
+- Habits: I drink coffee every morning
+- States: I know, I understand, I have
+
+Use Present Continuous for:
+- Actions happening now: I am reading
+- Temporary situations: I am staying with friends
+
+## 7. Dropping "It" as a Subject
+
+**The Problem**: Arabic often omits the subject pronoun.
+
+**Common Mistakes**:
+- "Is cold today" instead of "It is cold today"
+- "Raining now" instead of "It is raining now"
+
+**The Fix**: English always needs a subject. Use "it" for:
+- Weather: It is sunny
+- Time: It is 5 o'clock
+- Distance: It is far from here
+
+## 8. Wrong Preposition Use
+
+**The Problem**: Prepositions rarely translate directly between languages.
+
+**Common Mistakes**:
+- "I am good in English" instead of "I am good at English"
+- "I depend on myself" (correct!) vs "I depend from myself" (wrong)
+
+**The Fix**: Learn prepositions as part of phrases, not individually:
+- Good at (sports, subjects)
+- Interested in
+- Afraid of
+- Wait for
+
+## 9. Pluralization Errors
+
+**The Problem**: Arabic plurals are complex and irregular.
+
+**Common Mistakes**:
+- "I have two childs" instead of "two children"
+- "Many informations" instead of "much information"
+
+**The Fix**: Learn irregular plurals:
+- child → children
+- person → people
+- information (uncountable - no "s")
+- advice (uncountable - no "s")
+
+## 10. The "V" Sound
+
+**The Problem**: Arabic doesn't have the "V" sound.
+
+**Common Mistakes**:
+- "I'm wery happy" instead of "I'm very happy"
+- "I love fideo games" instead of "video games"
+
+**The Fix**: For "V," lightly bite your lower lip and vibrate:
+- very, video, voice, leave
+
+Practice: "Very valuable vegetables in the village."
+
+## How to Improve Faster
+
+1. **Awareness first** - Now you know these patterns, notice them
+2. **Practice deliberately** - Focus on one issue at a time
+3. **Get feedback** - A teacher who understands Arabic helps enormously
+4. **Record yourself** - Listen back and identify errors
+5. **Be patient** - Changing habits takes time
+
+## Get Personalized Help
+
+At Takalam, we understand the specific challenges Arabic speakers face because we've overcome them ourselves. Our lessons target these exact issues with personalized practice and feedback.
+
+Ready to eliminate these mistakes? Book a free trial lesson!
+    `,
+  },
 };
 
 type Props = {

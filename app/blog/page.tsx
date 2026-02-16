@@ -16,6 +16,36 @@ export const metadata: Metadata = {
 // Blog posts data
 const blogPosts = [
   {
+    slug: "common-english-mistakes-arabic-speakers",
+    title: "10 Common English Mistakes Arabic Speakers Make (And How to Fix Them)",
+    excerpt: "Learn about the most frequent errors Arabic speakers make in English and practical tips to overcome them.",
+    date: "February 10, 2026",
+    dateISO: "2026-02-10",
+    readTime: "8 min read",
+    category: "Grammar",
+    image: "/blog/grammar.png",
+  },
+  {
+    slug: "ielts-vs-toefl-which-test-should-you-take",
+    title: "IELTS vs TOEFL: Which English Test Should You Take?",
+    excerpt: "A comprehensive comparison of IELTS and TOEFL to help you choose the right English proficiency test for your goals.",
+    date: "February 5, 2026",
+    dateISO: "2026-02-05",
+    readTime: "6 min read",
+    category: "Exam Prep",
+    image: "/blog/exams.png",
+  },
+  {
+    slug: "how-to-learn-english-fast-morocco",
+    title: "How to Learn English Fast in Morocco: A Complete Guide",
+    excerpt: "Discover the best methods and resources to learn English quickly in Morocco, from online courses to immersion techniques.",
+    date: "January 30, 2026",
+    dateISO: "2026-01-30",
+    readTime: "7 min read",
+    category: "Learning Tips",
+    image: "/blog/learning.png",
+  },
+  {
     slug: "5-tips-to-improve-english-speaking",
     title: "5 Practical Tips to Improve Your English Speaking",
     excerpt: "Discover actionable strategies to boost your spoken English skills, even if you're starting from scratch.",
@@ -23,7 +53,7 @@ const blogPosts = [
     dateISO: "2026-01-25",
     readTime: "5 min read",
     category: "Speaking",
-    image: "/blog/speaking-tips.jpg",
+    image: "/blog/speaking-tips.png",
   },
   {
     slug: "overcome-fear-of-speaking-english",
@@ -33,7 +63,7 @@ const blogPosts = [
     dateISO: "2026-01-20",
     readTime: "4 min read",
     category: "Confidence",
-    image: "/blog/confidence.jpg",
+    image: "/blog/confidence.png",
   },
   {
     slug: "ielts-preparation-guide",
@@ -43,7 +73,7 @@ const blogPosts = [
     dateISO: "2026-01-15",
     readTime: "8 min read",
     category: "Exam Prep",
-    image: "/blog/ielts.jpg",
+    image: "/blog/ielts.png",
   },
 ];
 
@@ -173,11 +203,14 @@ export default function BlogPage() {
               href={`/blog/${post.slug}`}
               className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300"
             >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
-                <svg className="w-16 h-16 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
+              {/* Blog Post Image */}
+              <div className="h-48 relative overflow-hidden">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
               
               {/* Content */}

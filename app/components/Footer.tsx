@@ -29,11 +29,14 @@ export default function Footer() {
 
           {/* Quick Links - Enhanced for SEO */}
           <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-x-6 gap-y-3 text-sm">
-            <a href="#intro-video" className="hover:text-green-400 transition-colors">
+            <a href="/about" className="hover:text-green-400 transition-colors">
               {t("footer.about")}
             </a>
-            <a href="#why-takalam" className="hover:text-green-400 transition-colors">
-              {t("footer.whoItsFor")}
+            <a href="/ielts" className="hover:text-green-400 transition-colors">
+              {t("footer.ielts")}
+            </a>
+            <a href="/business-english" className="hover:text-green-400 transition-colors">
+              {t("footer.businessEnglish")}
             </a>
             <a href="#private-pricing" className="hover:text-green-400 transition-colors">
               1-on-1 Sessions

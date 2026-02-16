@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Set turbopack root to fix module resolution
+  turbopack: {
+    root: __dirname,
+  },
+  
   // Image optimization
   images: {
     remotePatterns: [

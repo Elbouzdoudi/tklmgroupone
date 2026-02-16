@@ -26,10 +26,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://takalamenglish.ma";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Takalam - Learn English Online | #1 English Classes in Morocco",
+    default: "Takalam English Center Morocco | Online English Classes & IELTS Prep",
     template: "%s | Takalam English Center Morocco",
   },
-  description: "Learn English online with Morocco's top-rated English center. Private 1-on-1 lessons & group classes. IELTS prep, business English, speaking confidence. Start today!",
+  description: "Takalam English Center - Morocco's online English school. Private 1-on-1 lessons & group classes. IELTS prep, business English, speaking confidence. Start today!",
   keywords: [
     // Primary English keywords
     "English classes Morocco",
@@ -331,6 +331,94 @@ const serviceSchema = {
   }
 };
 
+// FAQ Schema for rich results in Google Search
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What level of English do I need to start at Takalam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Any level! Whether you're a complete beginner or advanced speaker looking to refine your skills, lessons are personalized to your current level and goals. We welcome learners from A1 (beginner) to C2 (advanced)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much do English lessons cost at Takalam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Private 1-on-1 sessions start at 200 MAD per session. We offer packages: 4 sessions for 700 MAD, 8 sessions for 1300 MAD, 12 sessions for 1800 MAD, and 16 sessions for 2200 MAD. Group sessions (10 learners) cost 200 MAD per month for 8 sessions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are Takalam English classes online or in-person?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All Takalam classes are 100% online via Zoom or Google Meet. You can learn from anywhere in Morocco or abroad with just a smartphone, tablet, or computer and stable internet connection."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long is each English session?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Private 1-on-1 sessions are 50 minutes long. Group sessions are 1 hour (60 minutes) and held twice per week on a fixed schedule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What payment methods does Takalam accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We accept bank transfers (CIH Bank) and PayPal payments. Payment must be completed before your first session, and you'll need to upload payment proof in the registration form."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I reschedule my English lesson?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! You can reschedule with 24 hours notice at no extra cost. Sessions missed without notice are counted as completed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Takalam offer IELTS preparation courses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! We offer comprehensive IELTS preparation covering all four sections: Speaking, Writing, Reading, and Listening. Our personalized coaching helps you achieve your target band score."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do group English sessions work at Takalam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Group sessions are 1 hour long, held twice per week on a fixed schedule. Groups of 10 cost 200 MAD/month, and groups of 5 cost 350 MAD/month. Groups start only when all seats are filled."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a free trial or diagnostic test?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For group sessions, you receive a free 15-minute oral diagnostic test after payment and once the group is complete. This helps assess your level before sessions begin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes Takalam different from other English schools in Morocco?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Takalam focuses on 80% speaking practice rather than memorization. We provide a safe, judgment-free space where mistakes are part of learning. Lessons are personalized for your goals, not a generic curriculum."
+      }
+    }
+  ]
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -355,6 +443,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
