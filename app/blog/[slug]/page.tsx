@@ -25,26 +25,36 @@ function getImageUrl(source: any, width: number, height: number) {
   return null;
 }
 
-// Fetch a single post by slug
+// Fetch a single post by slug with error handling
 async function getPost(slug: string) {
-  const query = `*[_type == "post" && slug.current == $slug][0] {
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    body,
-    "category": categories[0]->title,
-    "author": author->{name, bio, image}
-  }`;
-  
-  return client.fetch(query, { slug }, { next: { revalidate: 60 } });
+  try {
+    const query = `*[_type == "post" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      body,
+      "category": categories[0]->title,
+      "author": author->{name, bio, image}
+    }`;
+    
+    return await client.fetch(query, { slug }, { next: { revalidate: 60 } });
+  } catch (error) {
+    console.error("Failed to fetch post from Sanity:", error);
+    return null;
+  }
 }
 
-// Fetch all post slugs for static generation
+// Fetch all post slugs for static generation with error handling
 async function getAllSlugs() {
-  const query = `*[_type == "post" && defined(slug.current)].slug.current`;
-  return client.fetch(query);
+  try {
+    const query = `*[_type == "post" && defined(slug.current)].slug.current`;
+    return await client.fetch(query);
+  } catch (error) {
+    console.error("Failed to fetch slugs from Sanity:", error);
+    return [];
+  }
 }
 
 // Format date

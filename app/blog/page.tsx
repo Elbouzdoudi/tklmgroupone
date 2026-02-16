@@ -34,20 +34,25 @@ function getImageUrl(source: any, width: number, height: number) {
   return null;
 }
 
-// Fetch posts from Sanity
+// Fetch posts from Sanity with error handling
 async function getPosts() {
-  const query = `*[_type == "post"] | order(publishedAt desc) {
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    "excerpt": pt::text(body[0..2]),
-    "category": categories[0]->title,
-    "author": author->name
-  }`;
-  
-  return client.fetch(query, {}, { next: { revalidate: 60 } });
+  try {
+    const query = `*[_type == "post"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      mainImage,
+      publishedAt,
+      "excerpt": pt::text(body[0..2]),
+      "category": categories[0]->title,
+      "author": author->name
+    }`;
+    
+    return await client.fetch(query, {}, { next: { revalidate: 60 } });
+  } catch (error) {
+    console.error("Failed to fetch posts from Sanity:", error);
+    return []; // Return empty array on error
+  }
 }
 
 // Format date
