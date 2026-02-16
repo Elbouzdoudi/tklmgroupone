@@ -10,8 +10,11 @@ export default function Testimonials() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentVideoSlide, setCurrentVideoSlide] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [videoTouchStart, setVideoTouchStart] = useState<number | null>(null);
+  const [videoTouchEnd, setVideoTouchEnd] = useState<number | null>(null);
 
   // Minimum swipe distance for a swipe to register
   const minSwipeDistance = 50;
@@ -89,6 +92,42 @@ export default function Testimonials() {
   const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
   }, []);
+
+  const goToVideoSlide = useCallback((index: number) => {
+    setCurrentVideoSlide(index);
+  }, []);
+
+  const nextVideo = useCallback(() => {
+    setCurrentVideoSlide((prev) => (prev + 1) % videoTestimonials.length);
+  }, []);
+
+  const prevVideo = useCallback(() => {
+    setCurrentVideoSlide((prev) => (prev - 1 + videoTestimonials.length) % videoTestimonials.length);
+  }, []);
+
+  // Video swipe handlers
+  const onVideoTouchStart = (e: React.TouchEvent) => {
+    setVideoTouchEnd(null);
+    setVideoTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onVideoTouchMove = (e: React.TouchEvent) => {
+    setVideoTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onVideoTouchEnd = () => {
+    if (!videoTouchStart || !videoTouchEnd) return;
+    const distance = videoTouchStart - videoTouchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextVideo();
+    }
+    if (isRightSwipe) {
+      prevVideo();
+    }
+  };
 
   return (
     <section
@@ -267,30 +306,88 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Video Testimonials */}
+        {/* Video Testimonials Carousel */}
         <div
           className={`mt-16 ${isVisible ? "animate-fade-in-up delay-300" : "opacity-0"}`}
         >
           <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
             {t("testimonials.videoTitle")} <span className="text-green-600">{t("testimonials.videoTitleHighlight")}</span>
           </h3>
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {videoTestimonials.map((video, index) => (
+          
+          {/* Video Carousel Container */}
+          <div className="relative max-w-sm mx-auto">
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevVideo}
+              className="absolute left-0 sm:-left-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:text-green-600 transition-all"
+              aria-label="Previous video"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              onClick={nextVideo}
+              className="absolute right-0 sm:-right-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center text-gray-700 hover:text-green-600 transition-all"
+              aria-label="Next video"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Carousel */}
+            <div 
+              className="overflow-hidden rounded-2xl"
+              onTouchStart={onVideoTouchStart}
+              onTouchMove={onVideoTouchMove}
+              onTouchEnd={onVideoTouchEnd}
+            >
               <div
-                key={index}
-                className="relative rounded-2xl overflow-hidden shadow-xl bg-black aspect-[9/16] max-h-[500px]"
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${currentVideoSlide * 100}%)` }}
               >
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                >
-                  <source src={video.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                {videoTestimonials.map((video, index) => (
+                  <div
+                    key={index}
+                    className="w-full flex-shrink-0"
+                  >
+                    <div className="relative rounded-2xl overflow-hidden shadow-xl bg-black aspect-[9/16] max-h-[500px]">
+                      <video
+                        className="w-full h-full object-cover"
+                        controls
+                        playsInline
+                        preload="metadata"
+                      >
+                        <source src={video.src} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Carousel Indicators */}
+            <div className="flex justify-center gap-2 mt-4">
+              {videoTestimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToVideoSlide(index)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    currentVideoSlide === index
+                      ? "bg-green-600 w-8"
+                      : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                  aria-label={`Go to video ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Swipe hint for mobile */}
+            <p className="text-center text-xs text-gray-400 mt-3 sm:hidden">
+              ← Swipe to see more →
+            </p>
           </div>
         </div>
 
