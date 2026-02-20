@@ -172,6 +172,57 @@ export default function RulesPage() {
       ],
       highlight: true,
     },
+    {
+      id: "kids",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      title: "Kids Program Policy",
+      items: [
+        "Kids programs are available for children ages 6-16.",
+        "A parent or guardian must be present during the first session for children under 12.",
+        "Parents will receive progress updates after each session via WhatsApp.",
+        "Sessions are designed to be interactive and age-appropriate.",
+        "If a child is consistently disruptive, we reserve the right to pause sessions and discuss with parents.",
+        "Parental consent is required for all enrollments. The registration form must be completed by a parent/guardian.",
+      ],
+    },
+    {
+      id: "corporate",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+      ),
+      title: "Corporate Training Policy",
+      items: [
+        "Corporate programs require a minimum commitment of 10 sessions per employee.",
+        "Custom pricing is available based on group size and training requirements.",
+        "A needs assessment meeting will be scheduled before training begins.",
+        "Progress reports can be provided to HR/management upon request.",
+        "Corporate invoicing is available with NET 15 payment terms for established companies.",
+        "Rescheduling corporate sessions requires 48 hours notice (instead of 24 hours for individual sessions).",
+      ],
+    },
+    {
+      id: "exams",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      title: "Exam Preparation Policy",
+      items: [
+        "Exam prep packages include mock tests, writing feedback, and speaking practice.",
+        "We recommend starting preparation at least 2-3 months before your exam date.",
+        "Study materials and practice tests are provided digitally at no extra cost.",
+        "Takalam does not guarantee specific exam scores, but we commit to comprehensive preparation.",
+        "Exam registration fees are not included in our packages and must be paid directly to test centers.",
+        "If you need to postpone due to exam date changes, please inform us immediately.",
+      ],
+    },
   ];
 
   return (

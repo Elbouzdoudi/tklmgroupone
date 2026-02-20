@@ -530,7 +530,15 @@
       "q7": "Is Takalam only for Moroccan students?",
       "a7": "No! While we're based in Morocco, we teach students from all over the world. Lessons are 100% online, so you can learn from anywhere with an internet connection.",
       "q8": "Do you teach other languages besides English?",
-      "a8": "Currently, we focus exclusively on English teaching. This specialization allows us to provide the highest quality instruction for English learners."
+      "a8": "Currently, we focus exclusively on English teaching. This specialization allows us to provide the highest quality instruction for English learners.",
+      "q9": "What age groups do your kids programs cover?",
+      "a9": "Our kids program covers three age groups: Little Explorers (6-9 years), Young Learners (10-12 years), and Teen Achievers (13-16 years). Each group has age-appropriate content and teaching methods.",
+      "q10": "Can my company get invoiced for corporate training?",
+      "a10": "Yes! We offer corporate invoicing with NET 15 payment terms for established companies. Contact us to discuss your organization's training needs and payment arrangements.",
+      "q11": "Do you offer trial sessions?",
+      "a11": "Yes! You can book a single session for 200 DHS to experience the Takalam method before committing to a package. This is a great way to see if our teaching style works for you.",
+      "q12": "What happens if I'm not satisfied with my lessons?",
+      "a12": "Your satisfaction is important to us. If you're not happy, please contact us to discuss your concerns. We offer refunds according to our refund policy, and we're always open to adjusting our approach to better meet your needs."
     },
     "communicationTitle": "We're Here to Help!",
     "communicationText": "Have questions about group sessions? WhatsApp us or send an email anytime! We're happy to help you choose the right option for your learning goals.",

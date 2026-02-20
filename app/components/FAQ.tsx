@@ -30,6 +30,9 @@ export default function FAQ() {
       { q: "Do you have classes for kids?", a: "Yes! We have age-appropriate programs for children ages 6-16 with specialized teachers." },
       { q: "Do you offer corporate training?", a: "Yes! We provide customized English training programs for businesses and organizations." },
       { q: "Can I get a certificate?", a: "Yes, you can receive a completion certificate after finishing a package. For official certifications, we prepare you for recognized exams." },
+      { q: "What age groups do your kids programs cover?", a: "Our kids program covers three age groups: Little Explorers (6-9 years), Young Learners (10-12 years), and Teen Achievers (13-16 years)." },
+      { q: "Can my company get invoiced for corporate training?", a: "Yes! We offer corporate invoicing with NET 15 payment terms for established companies." },
+      { q: "Do you offer trial sessions?", a: "Yes! You can book a single session for 200 DHS to experience the Takalam method before committing to a package." },
     ];
 
     return {
@@ -96,6 +99,10 @@ export default function FAQ() {
     { q: t("faq.general.q6"), a: t("faq.general.a6") },
     { q: t("faq.general.q7"), a: t("faq.general.a7") },
     { q: t("faq.general.q8"), a: t("faq.general.a8") },
+    { q: t("faq.general.q9"), a: t("faq.general.a9") },
+    { q: t("faq.general.q10"), a: t("faq.general.a10") },
+    { q: t("faq.general.q11"), a: t("faq.general.a11") },
+    { q: t("faq.general.q12"), a: t("faq.general.a12") },
   ];
 
   const faqs = activeTab === "private" ? privateFaqs : activeTab === "group" ? groupFaqs : generalFaqs;
