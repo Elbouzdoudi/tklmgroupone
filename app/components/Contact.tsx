@@ -508,7 +508,7 @@ export default function Contact() {
 
               <div className="bg-white/10 rounded-xl p-4 mb-4">
                 <p className="text-blue-200 text-xs uppercase tracking-wide mb-2">{t("contact.paypalSendTo")}</p>
-                <p className="font-mono font-bold text-lg break-all">takalamenglishcenter@gmail.com</p>
+                <p className="font-mono font-bold text-lg break-all">mohammedsaidelbouzdoudi99@gmail.com</p>
               </div>
 
               <div className="space-y-3">
