@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-400 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {/* Logo & Description */}
           <div className="text-center md:text-left">
             <div className="h-16 flex items-center mb-3">
@@ -22,50 +22,80 @@ export default function Footer() {
                 className="h-72 w-auto mx-auto md:mx-0 brightness-0 invert object-contain -my-24"
               />
             </div>
-            <p className="text-sm max-w-xs">
+            <p className="text-sm max-w-xs mx-auto md:mx-0">
               {t("footer.description")}
             </p>
           </div>
 
-          {/* Quick Links - Enhanced for SEO */}
-          <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-x-6 gap-y-3 text-sm">
-            <a href="/about" className="hover:text-green-400 transition-colors">
-              {t("footer.about")}
-            </a>
-            <a href="/ielts" className="hover:text-green-400 transition-colors">
-              {t("footer.ielts")}
-            </a>
-            <a href="/business-english" className="hover:text-green-400 transition-colors">
-              {t("footer.businessEnglish")}
-            </a>
-            <a href="#private-pricing" className="hover:text-green-400 transition-colors">
-              1-on-1 Sessions
-            </a>
-            <a href="#group-sessions" className="hover:text-green-400 transition-colors">
-              Group Sessions
-            </a>
-            <a href="#how-it-works" className="hover:text-green-400 transition-colors">
-              {t("footer.howItWorks")}
-            </a>
-            <a href="#faq" className="hover:text-green-400 transition-colors">
-              {t("footer.faq")}
-            </a>
-            <a href="/blog" className="hover:text-green-400 transition-colors">
-              {t("footer.blog")}
-            </a>
-            <a href="#contact" className="hover:text-green-400 transition-colors">
-              {t("footer.contact")}
-            </a>
-            <a href="/careers" className="hover:text-green-400 transition-colors">
-              {t("footer.teachWithUs")}
-            </a>
-            <a href="/rules" className="hover:text-green-400 transition-colors">
-              {t("footer.termsAndPolicies")}
-            </a>
+          {/* Programs */}
+          <div>
+            <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Programs</h3>
+            <div className="flex flex-col gap-2 text-sm">
+              <a href="/corporate" className="hover:text-green-400 transition-colors">
+                Corporate English
+              </a>
+              <a href="/kids" className="hover:text-green-400 transition-colors">
+                Kids English
+              </a>
+              <a href="/exams" className="hover:text-green-400 transition-colors">
+                Exam Preparation
+              </a>
+              <a href="/ielts" className="hover:text-green-400 transition-colors">
+                {t("footer.ielts")}
+              </a>
+              <a href="/business-english" className="hover:text-green-400 transition-colors">
+                {t("footer.businessEnglish")}
+              </a>
+            </div>
           </div>
 
-          {/* Social & Contact */}
-          <div className="flex items-center gap-3">
+          {/* Sessions */}
+          <div>
+            <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Sessions</h3>
+            <div className="flex flex-col gap-2 text-sm">
+              <a href="#private-pricing" className="hover:text-green-400 transition-colors">
+                1-on-1 Sessions
+              </a>
+              <a href="#group-sessions" className="hover:text-green-400 transition-colors">
+                Group Sessions
+              </a>
+              <a href="#how-it-works" className="hover:text-green-400 transition-colors">
+                {t("footer.howItWorks")}
+              </a>
+            </div>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Company</h3>
+            <div className="flex flex-col gap-2 text-sm">
+              <a href="/about" className="hover:text-green-400 transition-colors">
+                {t("footer.about")}
+              </a>
+              <a href="/blog" className="hover:text-green-400 transition-colors">
+                {t("footer.blog")}
+              </a>
+              <a href="/press" className="hover:text-green-400 transition-colors">
+                Press & Media
+              </a>
+              <a href="/careers" className="hover:text-green-400 transition-colors">
+                {t("footer.teachWithUs")}
+              </a>
+              <a href="#faq" className="hover:text-green-400 transition-colors">
+                {t("footer.faq")}
+              </a>
+              <a href="#contact" className="hover:text-green-400 transition-colors">
+                {t("footer.contact")}
+              </a>
+              <a href="/rules" className="hover:text-green-400 transition-colors">
+                {t("footer.termsAndPolicies")}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Social & Contact */}
+        <div className="flex justify-center gap-3 mt-8">
             {/* Instagram */}
             <a
               href="https://www.instagram.com/takalamenglishcenter/"
@@ -113,7 +143,6 @@ export default function Footer() {
               </svg>
             </a>
           </div>
-        </div>
 
         {/* Divider */}
         <div className="border-t border-gray-800 my-8"></div>
