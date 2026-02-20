@@ -231,7 +231,9 @@ export default function PressPage() {
                 </div>
                 <div>
                   <div className="text-sm text-slate-500">WhatsApp</div>
-                  <span className="font-medium text-slate-900">Available on request</span>
+                  <a href="https://wa.me/212722774753?text=Hi, I have a media inquiry about Takalam." className="font-medium text-slate-900 hover:text-green-600">
+                    +212 722 774 753
+                  </a>
                 </div>
               </div>
             </div>
