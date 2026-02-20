@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     "Takalam partnership",
     "English teaching startup Morocco"
   ],
+  alternates: {
+    canonical: "https://takalamenglish.ma/press",
+  },
   openGraph: {
     title: "Press & Media | Takalam English Center",
     description: "Media resources and press information about Takalam English Center Morocco.",

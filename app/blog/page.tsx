@@ -7,6 +7,9 @@ import imageUrlBuilder from "@sanity/image-url";
 export const metadata: Metadata = {
   title: "Blog - English Learning Tips & Guides",
   description: "Free English learning tips, speaking strategies, IELTS preparation guides, and confidence-building techniques from Takalam English Center Morocco.",
+  alternates: {
+    canonical: "https://takalamenglish.ma/blog",
+  },
   openGraph: {
     title: "English Learning Blog | Takalam English Center",
     description: "Free English learning tips, speaking strategies, and exam preparation guides from Takalam.",

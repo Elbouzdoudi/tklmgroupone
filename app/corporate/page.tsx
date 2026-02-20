@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "formation anglais entreprise Maroc",
     "تدريب الإنجليزية للشركات المغرب"
   ],
+  alternates: {
+    canonical: "https://takalamenglish.ma/corporate",
+  },
   openGraph: {
     title: "Corporate English Training | Takalam English Center Morocco",
     description: "Professional English training solutions for businesses. Customized programs for your team's success.",

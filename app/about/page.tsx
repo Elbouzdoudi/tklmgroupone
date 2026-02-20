@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     "معلم انجليزي المغرب",
     "professeur anglais Maroc"
   ],
+  alternates: {
+    canonical: "https://takalamenglish.ma/about",
+  },
   openGraph: {
     title: "About Takalam English Center | Your English Learning Partner",
     description: "Meet the dedicated teachers helping Moroccans achieve English fluency.",

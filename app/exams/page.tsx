@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "تحضير امتحان الإنجليزية المغرب",
     "preparation examen anglais Maroc"
   ],
+  alternates: {
+    canonical: "https://takalamenglish.ma/exams",
+  },
   openGraph: {
     title: "English Exam Preparation | IELTS, TOEFL, Cambridge | Takalam",
     description: "Expert coaching for all major English proficiency exams. Achieve your target score with Takalam.",

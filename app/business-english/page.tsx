@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "anglais professionnel Maroc",
     "الانجليزية للاعمال المغرب"
   ],
+  alternates: {
+    canonical: "https://takalamenglish.ma/business-english",
+  },
   openGraph: {
     title: "Business English Course | Takalam English Center Morocco",
     description: "Professional English training for your career success. Master business vocabulary, emails, and presentations.",

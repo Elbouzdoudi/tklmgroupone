@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "تحضير ايلتس المغرب",
     "preparation IELTS Maroc"
   ],
+  alternates: {
+    canonical: "https://takalamenglish.ma/ielts",
+  },
   openGraph: {
     title: "IELTS Preparation Course | Takalam English Center Morocco",
     description: "Achieve your target IELTS band score with personalized coaching. Expert guidance for all 4 sections.",

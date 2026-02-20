@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     "cours anglais enfants Maroc",
     "تعليم الإنجليزية للأطفال المغرب"
   ],
+  alternates: {
+    canonical: "https://takalamenglish.ma/kids",
+  },
   openGraph: {
     title: "English for Kids | Takalam English Center Morocco",
     description: "Fun, engaging English classes designed for children. Build your child's confidence in English communication.",
