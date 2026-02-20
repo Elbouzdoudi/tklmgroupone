@@ -8,7 +8,7 @@ export default function FAQ() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [activeTab, setActiveTab] = useState<"private" | "group">("private");
+  const [activeTab, setActiveTab] = useState<"private" | "group" | "general">("private");
 
   // FAQ Schema for SEO (JSON-LD)
   const faqSchema = useMemo(() => {
@@ -25,6 +25,11 @@ export default function FAQ() {
       { q: "What happens if the group doesn't fill up?", a: "If a group doesn't reach the required number of learners within 30 days, you will receive a full refund." },
       { q: "Is there a diagnostic test for groups?", a: "Yes! After payment and once the group is complete, you'll receive a 15-minute oral diagnostic test with a tutor to assess your level before sessions begin." },
       { q: "How do group sessions work?", a: "Group sessions are 1 hour long, held twice per week on a fixed schedule. You'll learn alongside other motivated adults at a similar level." },
+      // General FAQs
+      { q: "Do you offer exam preparation?", a: "Yes! We offer preparation for IELTS, TOEFL, Cambridge, and Duolingo English Test with specialized coaching." },
+      { q: "Do you have classes for kids?", a: "Yes! We have age-appropriate programs for children ages 6-16 with specialized teachers." },
+      { q: "Do you offer corporate training?", a: "Yes! We provide customized English training programs for businesses and organizations." },
+      { q: "Can I get a certificate?", a: "Yes, you can receive a completion certificate after finishing a package. For official certifications, we prepare you for recognized exams." },
     ];
 
     return {
@@ -82,7 +87,18 @@ export default function FAQ() {
     { q: t("faq.group.q10"), a: t("faq.group.a10") },
   ];
 
-  const faqs = activeTab === "private" ? privateFaqs : groupFaqs;
+  const generalFaqs = [
+    { q: t("faq.general.q1"), a: t("faq.general.a1") },
+    { q: t("faq.general.q2"), a: t("faq.general.a2") },
+    { q: t("faq.general.q3"), a: t("faq.general.a3") },
+    { q: t("faq.general.q4"), a: t("faq.general.a4") },
+    { q: t("faq.general.q5"), a: t("faq.general.a5") },
+    { q: t("faq.general.q6"), a: t("faq.general.a6") },
+    { q: t("faq.general.q7"), a: t("faq.general.a7") },
+    { q: t("faq.general.q8"), a: t("faq.general.a8") },
+  ];
+
+  const faqs = activeTab === "private" ? privateFaqs : activeTab === "group" ? groupFaqs : generalFaqs;
 
   // Reset open index when switching tabs
   useEffect(() => {
@@ -123,10 +139,10 @@ export default function FAQ() {
           }`}
           style={{ animationDelay: "0.1s" }}
         >
-          <div className="inline-flex bg-gray-100 rounded-xl p-1">
+          <div className="inline-flex bg-gray-100 rounded-xl p-1 flex-wrap justify-center gap-1">
             <button
               onClick={() => setActiveTab("private")}
-              className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
+              className={`px-4 sm:px-6 py-3 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
                 activeTab === "private"
                   ? "bg-green-600 text-white shadow-md"
                   : "text-gray-600 hover:text-gray-900"
@@ -139,7 +155,7 @@ export default function FAQ() {
             </button>
             <button
               onClick={() => setActiveTab("group")}
-              className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
+              className={`px-4 sm:px-6 py-3 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
                 activeTab === "group"
                   ? "bg-blue-600 text-white shadow-md"
                   : "text-gray-600 hover:text-gray-900"
@@ -149,6 +165,19 @@ export default function FAQ() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
               {t("faq.groupTab")}
+            </button>
+            <button
+              onClick={() => setActiveTab("general")}
+              className={`px-4 sm:px-6 py-3 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
+                activeTab === "general"
+                  ? "bg-purple-600 text-white shadow-md"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {t("faq.generalTab")}
             </button>
           </div>
         </div>
@@ -164,7 +193,7 @@ export default function FAQ() {
             <div
               key={`${activeTab}-${index}`}
               className={`border rounded-2xl overflow-hidden ${
-                activeTab === "private" ? "border-green-200" : "border-blue-200"
+                activeTab === "private" ? "border-green-200" : activeTab === "group" ? "border-blue-200" : "border-purple-200"
               }`}
             >
               <button
@@ -176,7 +205,7 @@ export default function FAQ() {
                 <span className="font-semibold text-gray-900">{faq.q}</span>
                 <svg
                   className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
-                    activeTab === "private" ? "text-green-600" : "text-blue-600"
+                    activeTab === "private" ? "text-green-600" : activeTab === "group" ? "text-blue-600" : "text-purple-600"
                   } ${openIndex === index ? "rotate-180" : ""}`}
                   fill="none"
                   stroke="currentColor"

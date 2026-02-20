@@ -13,6 +13,7 @@
     "headline": "Speak English with",
     "headlineHighlight": "Confidence",
     "subheadline": "— Not Fear",
+    "darijaTagline": "هادي فرصتك باش تهضر بلا خوف 🇲🇦",
     "description": "Private lessons or structured group sessions. Choose the format that fits your goals, schedule, and budget.",
     "cta1on1": "1-on-1 Sessions",
     "ctaGroup": "Group Sessions",
@@ -252,6 +253,7 @@
   "finalCta": {
     "headline": "Ready to Speak English",
     "headlineHighlight": "with Confidence?",
+    "darijaTagline": "واش نتا/نتي ready؟ يلاه نبداو! 💪",
     "subtext": "You already know me from social media. Now let's work together. Choose your package, pay, and start your English journey.",
     "ctaPackages": "View Packages",
     "ctaRegister": "Register Now",
@@ -471,6 +473,7 @@
     "subtitle": "Everything you need to know before getting started.",
     "privateTab": "1-on-1 Sessions",
     "groupTab": "Group Sessions",
+    "generalTab": "General",
     "private": {
       "q1": "What level of English do I need to start?",
       "a1": "Any level! Whether you're a complete beginner or advanced speaker looking to refine your skills, lessons are personalized to your current level and goals.",
@@ -510,6 +513,24 @@
       "a9": "Missed group sessions cannot be rescheduled or made up. You're responsible for attending at the fixed times. Frequent absences may affect your learning progress.",
       "q10": "How long does the refund process take?",
       "a10": "Refunds are processed within 7-14 business days after approval. Bank transfers may take additional time depending on your bank."
+    },
+    "general": {
+      "q1": "Do you offer exam preparation (IELTS, TOEFL, etc.)?",
+      "a1": "Yes! We offer specialized preparation for IELTS, TOEFL, Cambridge, and Duolingo English Test. Our exam prep includes mock tests, writing feedback, speaking practice, and test strategies.",
+      "q2": "Do you have English classes for kids?",
+      "a2": "Yes! We have age-appropriate programs for children ages 6-16. Our kids program uses interactive activities, games, and stories to make learning fun and effective.",
+      "q3": "Do you offer corporate or business English training?",
+      "a3": "Yes! We provide customized English training programs for businesses and organizations. This includes team training, executive coaching, and industry-specific English.",
+      "q4": "Can I get a certificate after completing my course?",
+      "a4": "Yes, you can receive a Takalam completion certificate after finishing a package. For official certifications recognized internationally, we prepare you for exams like IELTS or Cambridge.",
+      "q5": "What types of English do you teach?",
+      "a5": "We teach General English, Business English, Exam Preparation (IELTS/TOEFL), Conversational English, and specialized programs for specific needs like job interviews or presentations.",
+      "q6": "How quickly will I see improvement?",
+      "a6": "Most students notice improvement in confidence within 2-4 weeks. Significant progress in fluency typically takes 2-3 months with consistent weekly sessions. Results depend on practice and commitment.",
+      "q7": "Is Takalam only for Moroccan students?",
+      "a7": "No! While we're based in Morocco, we teach students from all over the world. Lessons are 100% online, so you can learn from anywhere with an internet connection.",
+      "q8": "Do you teach other languages besides English?",
+      "a8": "Currently, we focus exclusively on English teaching. This specialization allows us to provide the highest quality instruction for English learners."
     },
     "communicationTitle": "We're Here to Help!",
     "communicationText": "Have questions about group sessions? WhatsApp us or send an email anytime! We're happy to help you choose the right option for your learning goals.",

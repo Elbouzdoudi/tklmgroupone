@@ -31,7 +31,12 @@ export default function Header() {
   ];
 
   return (
-    <header
+    <>
+      {/* Skip to content link for keyboard users */}
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+      <header
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
         isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
       }`}
@@ -63,6 +68,7 @@ export default function Header() {
           <nav 
             className="hidden lg:flex items-center justify-center gap-4 xl:gap-6 flex-1 mx-4"
             style={{ direction: "ltr" }}
+            aria-label="Main navigation"
           >
             {navLinks.map((link) => (
               <a
@@ -91,9 +97,11 @@ export default function Header() {
 
           {/* Mobile/Tablet Menu Button */}
           <button
-            className="lg:hidden p-2 text-gray-600 hover:text-green-600"
+            className="lg:hidden p-2 text-gray-600 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 rounded-lg"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <svg
               className="w-6 h-6"
@@ -122,9 +130,11 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div 
+          <nav 
+            id="mobile-menu"
             className="lg:hidden bg-white border-t border-gray-100 py-4"
             style={{ direction: isRTL ? "rtl" : "ltr" }}
+            aria-label="Mobile navigation"
           >
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
@@ -150,9 +160,10 @@ export default function Header() {
                 </a>
               </div>
             </div>
-          </div>
+          </nav>
         )}
       </div>
     </header>
+    </>
   );
 }

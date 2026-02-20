@@ -63,11 +63,16 @@ export default function FinalCTA() {
           </div>
 
           {/* Headline */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
             {t("finalCta.headline")}
             <br />
             <span className="text-green-200">{t("finalCta.headlineHighlight")}</span>
           </h2>
+
+          {/* Darija Tagline */}
+          <p className="text-xl sm:text-2xl text-amber-300 font-medium mb-6" dir="rtl">
+            {t("finalCta.darijaTagline")}
+          </p>
 
           {/* Subtext */}
           <p className="text-lg text-green-100 mb-10 max-w-xl mx-auto">
