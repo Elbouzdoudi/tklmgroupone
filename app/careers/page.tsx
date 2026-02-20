@@ -800,20 +800,23 @@ export default function CareersPage() {
                   {/* CV Upload */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">CV/Resume (PDF, DOC)</label>
-                    <div className={`relative border-2 border-dashed rounded-lg p-4 transition-colors ${
+                    <input
+                      type="file"
+                      id="cv-upload"
+                      name="attachment"
+                      accept=".pdf,.doc,.docx"
+                      onChange={(e) => handleCvUpload(e.target.files?.[0] || null)}
+                      className="sr-only"
+                      disabled={cvUpload.status === 'uploading'}
+                    />
+                    <label 
+                      htmlFor="cv-upload"
+                      className={`block border-2 border-dashed rounded-lg p-4 transition-colors cursor-pointer ${
                       cvUpload.status === 'error' ? 'border-red-300 bg-red-50' :
                       cvUpload.status === 'uploaded' ? 'border-emerald-300 bg-emerald-50' :
-                      cvUpload.status === 'uploading' ? 'border-blue-300 bg-blue-50' :
+                      cvUpload.status === 'uploading' ? 'border-blue-300 bg-blue-50 cursor-wait' :
                       'border-slate-300 hover:border-emerald-400'
                     }`}>
-                      <input
-                        type="file"
-                        name="attachment"
-                        accept=".pdf,.doc,.docx"
-                        onChange={(e) => handleCvUpload(e.target.files?.[0] || null)}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                        disabled={cvUpload.status === 'uploading'}
-                      />
                       
                       {cvUpload.status === 'idle' && (
                         <div className="text-center py-4">
@@ -859,7 +862,7 @@ export default function CareersPage() {
                           </div>
                           <button
                             type="button"
-                            onClick={() => setCvUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' })}
+                            onClick={(e) => { e.preventDefault(); setCvUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' }); }}
                             className="text-slate-400 hover:text-slate-600 p-1"
                           >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -882,14 +885,14 @@ export default function CareersPage() {
                           </div>
                           <button
                             type="button"
-                            onClick={() => setCvUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' })}
+                            onClick={(e) => { e.preventDefault(); setCvUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' }); }}
                             className="text-red-400 hover:text-red-600 text-sm font-medium"
                           >
                             Retry
                           </button>
                         </div>
                       )}
-                    </div>
+                    </label>
                     {errors.cv && <p className="text-red-500 text-xs mt-1">{errors.cv}</p>}
                   </div>
                   
@@ -897,20 +900,23 @@ export default function CareersPage() {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">1-Minute Introduction Video</label>
                     <p className="text-xs text-slate-500 mb-2">Record a short video introducing yourself in English</p>
-                    <div className={`relative border-2 border-dashed rounded-lg p-4 transition-colors ${
+                    <input
+                      type="file"
+                      id="video-upload"
+                      name="video"
+                      accept="video/*"
+                      onChange={(e) => handleVideoUpload(e.target.files?.[0] || null)}
+                      className="sr-only"
+                      disabled={videoUpload.status === 'uploading'}
+                    />
+                    <label 
+                      htmlFor="video-upload"
+                      className={`block border-2 border-dashed rounded-lg p-4 transition-colors cursor-pointer ${
                       videoUpload.status === 'error' ? 'border-red-300 bg-red-50' :
                       videoUpload.status === 'uploaded' ? 'border-emerald-300 bg-emerald-50' :
-                      videoUpload.status === 'uploading' ? 'border-blue-300 bg-blue-50' :
+                      videoUpload.status === 'uploading' ? 'border-blue-300 bg-blue-50 cursor-wait' :
                       'border-slate-300 hover:border-emerald-400'
                     }`}>
-                      <input
-                        type="file"
-                        name="video"
-                        accept="video/*"
-                        onChange={(e) => handleVideoUpload(e.target.files?.[0] || null)}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                        disabled={videoUpload.status === 'uploading'}
-                      />
                       
                       {videoUpload.status === 'idle' && (
                         <div className="text-center py-4">
@@ -956,7 +962,7 @@ export default function CareersPage() {
                           </div>
                           <button
                             type="button"
-                            onClick={() => setVideoUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' })}
+                            onClick={(e) => { e.preventDefault(); setVideoUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' }); }}
                             className="text-slate-400 hover:text-slate-600 p-1"
                           >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -979,14 +985,14 @@ export default function CareersPage() {
                           </div>
                           <button
                             type="button"
-                            onClick={() => setVideoUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' })}
+                            onClick={(e) => { e.preventDefault(); setVideoUpload({ status: 'idle', progress: 0, file: null, base64Data: '', error: '' }); }}
                             className="text-red-400 hover:text-red-600 text-sm font-medium"
                           >
                             Retry
                           </button>
                         </div>
                       )}
-                    </div>
+                    </label>
                     {errors.video && <p className="text-red-500 text-xs mt-1">{errors.video}</p>}
                     
                     <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
