@@ -49,6 +49,16 @@ body {
   outline-offset: 2px;
 }
 
+/* Shimmer animation for upload progress */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* Remove default focus for mouse users but keep for keyboard */
 :focus:not(:focus-visible) {
   outline: none;

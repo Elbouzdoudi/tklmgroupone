@@ -1,11 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Set turbopack root to fix module resolution
-  turbopack: {
-    root: __dirname,
+  // Enable styled-components compiler support (needed for Sanity Studio)
+  compiler: {
+    styledComponents: true,
   },
-  
+
   // Image optimization
   images: {
     remotePatterns: [
