@@ -189,7 +189,7 @@ export default function PressPage() {
               Need high-resolution logos or other brand materials? Contact us and we'll send you our press kit.
             </p>
             <a
-              href="mailto:contact@takalamenglish.ma?subject=Press Kit Request"
+              href="mailto:takalamenglishcenter@gmail.com?subject=Press Kit Request"
               className="inline-flex items-center gap-2 text-green-600 font-medium hover:text-green-700"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -218,8 +218,8 @@ export default function PressPage() {
                 </div>
                 <div>
                   <div className="text-sm text-slate-500">Email</div>
-                  <a href="mailto:contact@takalamenglish.ma" className="font-medium text-slate-900 hover:text-green-600">
-                    contact@takalamenglish.ma
+                  <a href="mailto:takalamenglishcenter@gmail.com" className="font-medium text-slate-900 hover:text-green-600">
+                    takalamenglishcenter@gmail.com
                   </a>
                 </div>
               </div>

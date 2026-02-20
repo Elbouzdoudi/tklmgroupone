@@ -443,7 +443,7 @@ export default function ExamsPage() {
               +212 722 774 753
             </a>
             <a
-              href="mailto:contact@takalamenglish.ma?subject=Exam Preparation Inquiry"
+              href="mailto:takalamenglishcenter@gmail.com?subject=Exam Preparation Inquiry"
               className="inline-flex items-center justify-center gap-2 bg-indigo-700 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-indigo-800 transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

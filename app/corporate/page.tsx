@@ -351,13 +351,13 @@ export default function CorporatePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:contact@takalamenglish.ma?subject=Corporate Training Inquiry"
+              href="mailto:takalamenglishcenter@gmail.com?subject=Corporate Training Inquiry"
               className="inline-flex items-center justify-center gap-2 bg-white text-emerald-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-emerald-50 transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              contact@takalamenglish.ma
+              takalamenglishcenter@gmail.com
             </a>
             <a
               href="https://wa.me/212722774753?text=Hi, I'm interested in corporate English training for my company."

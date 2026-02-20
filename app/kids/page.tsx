@@ -353,7 +353,7 @@ export default function KidsPage() {
               +212 722 774 753
             </a>
             <a
-              href="mailto:contact@takalamenglish.ma?subject=Kids English Classes Inquiry"
+              href="mailto:takalamenglishcenter@gmail.com?subject=Kids English Classes Inquiry"
               className="inline-flex items-center justify-center gap-2 bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-orange-700 transition-all"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
