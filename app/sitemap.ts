@@ -1,6 +1,21 @@
 import { MetadataRoute } from "next";
+import { client } from "@/sanity/lib/client";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Fetch blog post slugs from Sanity
+async function getBlogSlugs() {
+  try {
+    const query = `*[_type == "post" && defined(slug.current)] {
+      "slug": slug.current,
+      "publishedAt": publishedAt
+    }`;
+    return await client.fetch(query);
+  } catch (error) {
+    console.error("Failed to fetch blog slugs:", error);
+    return [];
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://takalamenglish.ma";
 
   // Get current date for lastModified
@@ -76,45 +91,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Blog posts - add dynamically if you have a CMS
-  const blogPosts = [
-    {
-      url: `${baseUrl}/blog/common-english-mistakes-arabic-speakers`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/ielts-vs-toefl-which-test-should-you-take`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/how-to-learn-english-fast-morocco`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/5-tips-to-improve-english-speaking`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/overcome-fear-of-speaking-english`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/ielts-preparation-guide`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-  ];
+  // Fetch blog posts dynamically from Sanity
+  const blogSlugs = await getBlogSlugs();
+  const blogPosts = blogSlugs.map((post: { slug: string; publishedAt: string }) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.publishedAt ? new Date(post.publishedAt) : currentDate,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
 
   return [...staticPages, ...blogPosts];
 }
